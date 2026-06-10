@@ -1,0 +1,23 @@
+project:
+  type: website
+
+website:
+  title: "dashboard.v2"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: dashboard.qmd
+        text: Dashboard
+      - href: about.qmd
+        text: About This Project
+
+format:
+  html:
+    theme:
+      - lumen
+    css: styles.css
+    toc: true
+
+
+

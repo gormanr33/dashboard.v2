@@ -1,0 +1,101 @@
+---
+title: "About This Project"
+---
+
+::: {.card title="Background"}
+In January 2026, a hacker collective called **Martha Root** leaked data from the far-right white supremacist dating website **whitedate.net**, a platform that described itself as a site for “Europids seeking tribal love.”.
+
+“Europids” is a term commonly used in white supremacist and eugenicist spaces. The language reflects racist beliefs that race is biologically fixed and hierarchical, a sentiment that is quite common in modern far-right extremist communities.
+
+After scrubbing private emails and direct messages, **Martha Root** publicly released the remaining dataset. This project explores that leaked data through a series of visualizations created for a Data Visualization course at Hunter College in May 2026.
+:::
+
+::: {.card title="About The Dataset"}
+The original dataset contained **8,177 user entries**.
+
+To create the working dataset for this project, entries were removed if they:
+
+- Contained `"n/a"` responses for **Age**, **Gender**, or **Marital Status**
+- Listed ages below **17** or above **100**
+
+After cleaning, the final dataset used for analysis contained **8,130 entries**.
+
+Each visualization was then cleaned and recoded independently. This was intentional, most variables had substantial (+50%) missing data and separate cleaning pipelines stopped one analysis from influencing another analysis. Below is a breakdown of how each visualization was cleaned and recoded.
+:::
+
+:::::::::::::: {.callout-note collapse="true" title="Data Cleaning & Recoding"}
+::: {.callout-note title="1. Map"}
+- Recode `"n/a"` responses to `"No Response"` for:
+  - Income
+  - Education
+  - Marital Status
+  - Looking For
+  - Want Children
+  - Have Children
+  - Astrological Sign
+  - Tested IQ
+:::
+
+::: {.callout-note title="2. Age Distribution"}
+- Remove `"n/a"` responses
+- Remove entries younger than 17 or older than 100
+- Convert `Age` from character to numeric
+:::
+
+::: {.callout-note title="3. Gender"}
+- Remove `"n/a"` responses
+:::
+
+::: {.callout-note title="4. Income"}
+- Recode `"n/a"` responses to `"No Response"`
+:::
+
+::: {.callout-note title="5. Education"}
+- Recode `"n/a"` responses to `"No Response"`
+- Retain `"Diploma Level"` category
+:::
+
+::: {.callout-note title="6. Marital Status"}
+- Remove `"group forums only"` responses
+- Recode:
+  - `"single, divorced"` → `"divorced"`
+  - `"single, separated"` → `"separated"`
+  - `"single, widowed"` → `"widowed"`
+:::
+
+::: {.callout-note title="7. Looking For"}
+- Recode `"n/a"` responses to `"No Response"`
+- Remove `"group forums only"` responses
+:::
+
+::: {.callout-note title="8. Want Children"}
+Recoded multiple responses into broader categories:
+
+- `"cannot have children"` → `"do not wish to procreate"`
+- `"do not wish to procreate (further)"` → `"do not wish to procreate"`
+- `"i have one child"` → `"has children"`
+- `"i have 2 children"` → `"has children"`
+- `"i have three children"` → `"has children"`
+- `"not yet but would like to"` → `"would like to have children"`
+- `"would like to have 1 child"` → `"would like to have children"`
+- `"would like to have 2 children"` → `"would like to have children"`
+- `"would like to have 3 children"` → `"would like to have children"`
+- `"would like to have 4 children"` → `"would like to have children"`
+- `"would like to have more than 4"` → `"would like to have children"`
+- `"prefer not to say"` → `"No Response"`
+
+Then removed `"No Response"` entries from the visualization.
+:::
+
+::: {.callout-note title="9. Have Children"}
+- Recode `"n/a"` responses to `"No Response"`
+:::
+
+::: {.callout-note title="10. Astrological Sign"}
+- Remove `"n/a"` responses
+:::
+
+::: {.callout-note title="11. Tested IQ"}
+- Recode `"n/a"` responses to `"No Response"`
+:::
+::::::::::::::

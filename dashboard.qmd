@@ -1,0 +1,43 @@
+---
+format: 
+  dashboard:
+    orientation: columns
+scrolling: true
+editor: visual
+theme: lumen
+---
+
+## Columns {width= "35%"}
+
+placeholder text for column 1
+
+```{r, loadpackages}
+#| echo: false
+#| include: false
+
+library(tidyverse)
+library(leaflet)
+library(scales)
+library(reactable)
+library(htmltools)
+```
+
+```{r, printstarwars}
+head(starwars)
+```
+
+## Columns {width= "65%"}
+
+placeholder text for column 2
+
+### Rows {height="10%"}
+
+placeholder text for row 1
+
+### Rows {height="70%"}
+
+placeholder text for row 2
+
+### Rows {height="20%"}
+
+placeholder text for row 3
