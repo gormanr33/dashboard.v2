@@ -1,5 +1,9 @@
 project:
   type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+    - "*.md"
 
 website:
   title: "dashboard.v2"
