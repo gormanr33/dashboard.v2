@@ -22,16 +22,17 @@ jobs:
         with:
           r-version: '4.2.0'
 
-      # This replaces setup-renv and safely force-feeds pre-compiled binaries
       - name: Install R Dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          packages: any::renv
+          packages: |
+            any::renv
+            any::quarto
           cache-version: 1
 
       - name: Render and Publish
-        uses: quarto-dev/quarto-actions/publish@v2
-        with:
-          target: gh-pages
+        run: |
+          Rscript -e "renv::run(quarto::quarto_publish(target = 'gh-pages', server = 'github-pages'))"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
