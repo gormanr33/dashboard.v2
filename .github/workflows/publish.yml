@@ -30,11 +30,10 @@ jobs:
             any::quarto
           cache-version: 1
 
-      - name: Render and Publish Dashboard
-        shell: bash
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          Rscript -e "renv::run(system('quarto publish gh-pages --no-prompt'))"
+      - name: Render and Publish
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RENV_PATHS_LIBRARY: ${{ github.workspace }}/renv/library/R-4.2/x86_64-w64-mingw32
