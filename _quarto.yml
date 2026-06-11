@@ -10,11 +10,18 @@ website:
   navbar:
     left:
       - href: index.qmd
-        text: Home
-      - href: dashboard.qmd
-        text: Dashboard
-      - href: about.qmd
         text: About This Project
+      - href: demographics.qmd
+        text: Demographics
+      - href: datingquestions.qmd
+        text: Dating Questions
+      - href: descriptors.qmd
+        text: Descriptors
+      - href: map.qmd
+        text: Map
+      - href: datatable.qmd
+        text: Data Table
+
 
 format:
   html:
@@ -22,6 +29,3 @@ format:
       - lumen
     css: styles.css
     toc: true
-
-
-

@@ -1,0 +1,320 @@
+---
+editor: visual
+---
+
+```{r}
+#| include: false
+source("setup.R")
+```
+:::{.columns}
+
+::: {.column width=45%}
+```{r age, echo=FALSE}
+ggplot(stupiddf3, aes(x = Age)) +
+  geom_histogram(
+    binwidth = 3,
+    fill = "#8B5CF6",
+    color = "white",
+    alpha = 0.9
+  ) +
+  
+  scale_x_continuous(
+    breaks = seq(15, 95, by = 10)
+  ) +
+  
+  labs(
+    title = "Age Distribution",
+    x = "Age",
+    y = "Count"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    panel.grid.minor = element_blank()
+  )
+
+```
+
+```{r Gender, echo=FALSE}
+# Create summary table with percentages
+gender_df <- stupiddf3 %>%
+  dplyr::count(Gender) %>%
+  mutate(
+    percent = n / sum(n),
+    label = scales::percent(percent, accuracy = 1)
+  )
+
+ggplot(gender_df, aes(x = Gender, y = n, fill = Gender)) +
+  
+  geom_col(
+    width = 0.7,
+    show.legend = FALSE
+  ) +
+  
+  # Percentage labels
+  geom_text(
+    aes(label = label),
+    vjust = -0.5,
+    size = 5,
+    fontface = "bold",
+    color = "#374151"
+  ) +
+  
+  labs(
+    title = "Gender of Dating Website Users",
+    x = NULL,
+    y = "Respondents"
+  ) +
+  
+  scale_fill_manual(values = c(
+    "#14B8A6",
+    "#8B5CF6"
+  )) +
+  
+  # Prevent labels from getting cut off
+  expand_limits(y = max(gender_df$n) * 1.15) +
+  
+  theme_minimal(base_size = 14) +
+  
+  theme(
+    plot.title = element_text(
+      face = "bold",
+      size = 20,
+      color = "#111827"
+    ),
+    
+    plot.subtitle = element_text(
+      size = 12,
+      color = "#6B7280",
+      margin = margin(b = 15)
+    ),
+    
+    axis.title.y = element_text(
+      size = 12,
+      color = "#374151"
+    ),
+    
+    axis.text = element_text(
+      size = 11,
+      color = "#374151"
+    ),
+    
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.grid.major.y = element_line(
+      color = "#E5E7EB"
+    ),
+    
+    plot.background = element_rect(
+      fill = "white",
+      color = NA
+    ),
+    
+    panel.background = element_rect(
+      fill = "white",
+      color = NA
+    )
+  )
+
+```
+:::
+
+::: {.column width=45%}
+```{r Income Leve, echo=FALSE}
+#create new data frame, replace "NA" values w "No Response"
+incomedf <- stupiddf3 %>%
+  dplyr::count(Income)
+incomedf$Income[is.na(incomedf$Income)] <- "No Response"
+#clean + order factor
+incomedf <- incomedf %>%
+  mutate(
+    percent = n / sum(n) * 100,
+    
+    Income = factor(
+      Income,
+      levels = c(
+        "No Response",
+        "Studying",
+        "$/ 00-20k",
+        "$/ 20-40k",
+        "$/ 40-60k",
+        "$/ 60-80k",
+        "$/ 80-100k",
+        "$/100-120k",
+        "> $/120k"
+      )
+    )
+  )
+
+ggplot(incomedf, aes(x = Income, y = percent, fill = percent)) +
+  
+  geom_col(width = 0.72, show.legend = FALSE) +
+  
+  geom_text(
+    aes(label = paste0(round(percent, 1), "%")),
+    hjust = -0.15,
+    size = 4.3,
+    fontface = "bold",
+    color = "gray15"
+  ) +
+  
+  coord_flip() +
+  
+  scale_fill_gradient(
+    low = "#E9D5FF",
+    high = "#8B5CF6"
+  ) +
+  
+  scale_y_continuous(
+    labels = function(x) paste0(x, "%"),
+    expand = expansion(mult = c(0, 0.12))
+  ) +
+  
+  labs(
+    title = "Income Distribution",
+    subtitle = "Percentage of users by income category",
+    x = NULL,
+    y = "Percent of Users"
+  ) +
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(
+      face = "bold",
+      size = 18,
+      hjust = 0.5,
+      color = "gray10"
+    ),
+    
+    plot.subtitle = element_text(
+      size = 11,
+      hjust = 0.5,
+      color = "gray40",
+      margin = margin(b = 15)
+    ),
+    
+    axis.text.y = element_text(
+      size = 11,
+      face = "bold",
+      color = "gray20"
+    ),
+    
+    axis.text.x = element_text(
+      color = "gray35"
+    ),
+    
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    
+    panel.grid.major.x = element_line(
+      color = "gray88",
+      linewidth = 0.4
+    ),
+    
+    plot.background = element_rect(
+      fill = "white",
+      color = NA
+    )
+  )
+```
+
+```{r Education Level, echo=FALSE}
+#create new data frame, replace "NA" values w "No Response"
+educdf <- stupiddf3 %>%
+  dplyr::count(EducationLevel)
+educdf$EducationLevel[is.na(educdf$EducationLevel)] <- "No Response"
+#clean + order factor
+educdf <- educdf %>%
+  mutate(
+    percent = n / sum(n) * 100,
+    
+    EducationLevel = factor(
+      EducationLevel,
+      levels = c(
+        "No Response",
+        "Diploma Level",
+        "High School",
+        "Bachelor Degree",
+        "Masters Degree",
+        "Doctorate",
+        "College Degree"
+      )
+    )
+  )
+
+ggplot(educdf, aes(x = EducationLevel, y = percent, fill = percent)) +
+  
+  geom_col(width = 0.72, show.legend = FALSE) +
+  
+  geom_text(
+    aes(label = paste0(round(percent, 1), "%")),
+    hjust = -0.15,
+    size = 4.3,
+    fontface = "bold",
+    color = "gray15"
+  ) +
+  
+  coord_flip() +
+  
+  scale_fill_gradient(
+    low = "#CCFBF1",
+    high = "#14B8A6"
+  ) +
+  
+  scale_y_continuous(
+    labels = function(x) paste0(x, "%"),
+    expand = expansion(mult = c(0, 0.12))
+  ) +
+  
+  labs(
+    title = "Education Level Distribution",
+    subtitle = "Percentage of users by education level",
+    x = NULL,
+    y = "Percent of Users"
+  ) +
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(
+      face = "bold",
+      size = 18,
+      hjust = 0.5,
+      color = "gray10"
+    ),
+    
+    plot.subtitle = element_text(
+      size = 11,
+      hjust = 0.5,
+      color = "gray40",
+      margin = margin(b = 15)
+    ),
+    
+    axis.text.y = element_text(
+      size = 11,
+      face = "bold",
+      color = "gray20"
+    ),
+    
+    axis.text.x = element_text(
+      color = "gray35"
+    ),
+    
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    
+    panel.grid.major.x = element_line(
+      color = "gray88",
+      linewidth = 0.4
+    ),
+    
+    plot.background = element_rect(
+      fill = "white",
+      color = NA
+    )
+  )
+```
+:::
+
+:::

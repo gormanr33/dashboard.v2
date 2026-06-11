@@ -1,0 +1,61 @@
+---
+editor: visual
+---
+```{r}
+#| include: false
+source("setup.R")
+```
+
+
+```{r, echo=FALSE}
+#make new data frame for map
+mapdf <- stupiddf3 %>%
+  mutate(
+    AstrologicalSign = replace_na(AstrologicalSign, "No Response"),
+    EducationLevel = replace_na(EducationLevel, "No Response"),
+    Income = replace_na(Income, "No Response"),
+    LookingFor = replace_na(LookingFor, "No Response"),
+    WantChildren = replace_na(WantChildren, "No Response"),
+    HaveChildren = replace_na(HaveChildren, "No Response"),
+    TestedIQ = replace_na(TestedIQ, "No Response")
+  )
+mapdf <- mapdf %>%
+  filter(!is.na(Latitude))
+mapdf <- mapdf %>%
+  filter(!is.na(Longitude))
+
+#clustered markers
+leaflet(mapdf, width = "100%", height = 500) %>%
+  addProviderTiles(providers$CartoDB.VoyagerLabelsUnder) %>%
+
+  addCircleMarkers(
+    lng = ~Longitude,
+    lat = ~Latitude,
+    
+    radius = 5,
+    stroke = FALSE,
+    fillOpacity = 0.7,
+    
+    popup = ~paste0(
+      "<div style='font-family: Arial; font-size:13px; padding:6px;'>",
+      "<h4 style='margin:0 0 6px 0;'>", Nickname, "</h4>",
+      "<hr style='margin:4px 0;'>",
+      "<b>Age:</b> ", Age, "<br>",
+      "<b>Gender:</b> ", Gender, "<br>",
+      "<b>Sign:</b> ", AstrologicalSign, "<br>",
+      "<b>Education:</b> ", EducationLevel, "<br>",
+      "<b>Income:</b> ", Income, "<br>",
+      "<b>Looking For:</b> ", LookingFor, "<br>",
+      "<b>Wants Children:</b> ", WantChildren, "<br>",
+      "<b>Has Children:</b> ", HaveChildren, "<br>",
+      "<b>Tested IQ:</b> ", TestedIQ, "<br>",
+      "</div>"
+    ),
+    
+    clusterOptions = markerClusterOptions()
+  )
+```
+
+::: {.callout-note title="About the Map: Missing Data"}
+The map shows 1,338 users out of a total sample of 8,130. At first, I thought this was a data processing error in the latitude and longitude cleaning or import into R. After verifying the original JSON file, it became clear that the missing coordinates are not due to processing issues and that the source data itself is missing latitude and longitude information for 6,792 users.
+:::

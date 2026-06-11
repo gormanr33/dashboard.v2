@@ -1,0 +1,393 @@
+---
+editor: visual
+---
+
+```{r}
+#| include: false
+source("setup.R")
+```
+:::{.columns}
+
+::: {.column width=45%}
+```{r Marital Status, echo=FALSE}
+#Create new data frame to drop "group forums only" (unsure of what that means), combine redundant categories
+maritaldf <- stupiddf3 %>%
+  mutate(MaritalStatus_clean = case_when(
+    MaritalStatus == "Single, Divorced" ~ "Divorced",
+    MaritalStatus == "Single, Separated" ~ "Separated",
+    MaritalStatus == "Single, Widowed" ~ "Widowed",
+    MaritalStatus == "Divorced" ~ "Divorced",
+    MaritalStatus == "Separated" ~ "Separated",
+    MaritalStatus == "Widowed" ~ "Widowed",
+    MaritalStatus == "Single" ~ "Single",
+    MaritalStatus == "Engaged" ~ "Engaged",
+    MaritalStatus == "In Relationship" ~ "In Relationship",
+    MaritalStatus == "Married" ~ "Married",
+    MaritalStatus == "Groups Forums Only" ~ "Groups Forums Only"
+  )) %>%
+  filter(MaritalStatus_clean != "Groups Forums Only")
+
+maritaldf_plot <- maritaldf %>%
+  dplyr::count(MaritalStatus_clean) %>%
+  mutate(
+    pct = n / sum(n),
+    label = scales::percent(pct, accuracy = 0.1)
+  )
+
+ggplot(
+  maritaldf_plot,
+  aes(
+    x = reorder(MaritalStatus_clean, pct),
+    y = pct,
+    fill = MaritalStatus_clean
+  )
+) +
+  
+  geom_col(
+    width = 0.7,
+    show.legend = FALSE
+  ) +
+  
+  geom_text(
+    aes(label = label),
+    hjust = -0.15,
+    size = 4,
+    fontface = "bold",
+    color = "#374151"
+  ) +
+  
+  coord_flip() +
+  
+  scale_y_continuous(
+    labels = scales::percent_format(),
+    limits = c(0, max(maritaldf_plot$pct) * 1.15)
+  ) +
+  
+  scale_fill_manual(
+    values = my_palette
+  ) +
+  
+  labs(
+    title = "Marital Status of Users",
+    x = NULL,
+    y = "Percent of Users"
+  ) +
+  
+  theme_minimal(base_size = 14) +
+  
+  theme(
+    plot.title = element_text(
+      face = "bold",
+      size = 20,
+      color = "#111827"
+    ),
+    
+    axis.title.y = element_blank(),
+    
+    axis.title.x = element_text(
+      size = 12,
+      color = "#374151",
+      margin = margin(t = 10)
+    ),
+    
+    axis.text = element_text(
+      size = 11,
+      color = "#374151"
+    ),
+    
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    
+    panel.grid.major.x = element_line(
+      color = "#E5E7EB",
+      linewidth = 0.5
+    ),
+    
+    panel.background = element_rect(
+      fill = "white",
+      color = NA
+    ),
+    
+    plot.background = element_rect(
+      fill = "white",
+      color = NA
+    ),
+    
+    plot.margin = margin(20, 20, 20, 20)
+  )
+```
+
+```{r Looking For, echo=FALSE}
+#create new data frame, replace "NA" values w "No Response", drop "Groups and forums activity"
+lookingfordf <- stupiddf3 %>%
+  dplyr::count(LookingFor)
+lookingfordf$LookingFor[is.na(lookingfordf$LookingFor)] <- "No Response"
+lookingfordf <- lookingfordf %>%
+  filter(LookingFor != "Groups and forums activity") %>%
+  mutate(
+    percent = n / sum(n) * 100,
+    LookingFor = forcats::fct_reorder(LookingFor, percent)
+  ) %>%
+  arrange(percent)
+
+ggplot(lookingfordf, aes(x = LookingFor, y = percent, fill = LookingFor)) +
+  
+  geom_col(width = 0.72, show.legend = FALSE) +
+  
+  geom_text(
+    aes(label = paste0(round(percent, 1), "%")),
+    hjust = -0.15,
+    size = 4.2,
+    fontface = "bold",
+    color = "gray15"
+  ) +
+  
+  coord_flip() +
+  
+  scale_fill_manual(values = my_palette) +
+  
+  scale_y_continuous(
+    labels = function(x) paste0(x, "%"),
+    expand = expansion(mult = c(0, 0.12))
+  ) +
+  
+  labs(
+    title = "What Users Are Looking For in a Relationship",
+    subtitle = "Percentage of users by relationship preference",
+    x = NULL,
+    y = NULL
+  ) +
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(
+      face = "bold",
+      size = 18,
+      hjust = 0.5,
+      color = "gray10"
+    ),
+    
+    plot.subtitle = element_text(
+      size = 11,
+      hjust = 0.5,
+      color = "gray40",
+      margin = margin(b = 15)
+    ),
+    
+    axis.text.y = element_text(
+      size = 11,
+      face = "bold",
+      color = "gray20"
+    ),
+    
+    axis.text.x = element_text(
+      color = "gray35"
+    ),
+    
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    
+    panel.grid.major.x = element_line(
+      color = "gray88",
+      linewidth = 0.4
+    ),
+    
+    plot.background = element_rect(
+      fill = "white",
+      color = NA
+    )
+  )
+```
+:::
+
+::: {.column width=45%}
+```{r Want Children, echo=FALSE}
+#drop n/a values from chart, regroup 
+wantkiddf <- stupiddf3 %>%
+  dplyr::count(WantChildren)
+wantkiddf$WantChildren[is.na(wantkiddf$WantChildren)] <- "No Response"
+
+wantkiddf <- stupiddf3 %>%
+  mutate(WantChildren_clean = case_when(
+    WantChildren == "Cannot have children" ~ "Do not wish to procreate",
+    WantChildren == "Do not wish to procreate" ~ "Do not wish to procreate",
+    WantChildren == "Do not wish to procreate (further)" ~ "Do not wish to procreate",
+    WantChildren == "I have one child" ~ "Has Children",
+    WantChildren == "I have three children" ~ "Has Children",
+    WantChildren == "I have two children" ~ "Has Children",
+    WantChildren == "Not yet but would like to" ~ "Would like to have children",
+    WantChildren == "Prefer not to say" ~ "No Response",
+    WantChildren == "Undecided" ~ "Undecided",
+    WantChildren == "Would like to have 1 child" ~ "Would like to have children",
+    WantChildren == "Would like to have 2 children" ~ "Would like to have children",
+    WantChildren == "Would like to have 3 children" ~ "Would like to have children",
+    WantChildren == "Would like to have 4 children" ~ "Would like to have children",
+    WantChildren == "Would like to have children" ~ "Would like to have children",
+    WantChildren == "Would like to have more than 4" ~ "Would like to have children",
+    WantChildren == "No Response" ~ "No Response",
+  )) %>%
+  filter(WantChildren_clean !="No Response")
+
+wantkiddf_plot <- wantkiddf %>%
+  dplyr::count(WantChildren_clean) %>%
+  mutate(
+    percent = n / sum(n) * 100,
+    label = percent(percent, accuracy = 0.1)
+  ) %>%
+  arrange(percent)
+
+ggplot(
+  wantkiddf_plot,
+  aes(x = WantChildren_clean, y = percent, fill = WantChildren_clean)
+) +
+  
+  geom_col(width = 0.7, show.legend = FALSE) +
+  
+  geom_text(
+    aes(label = paste0(round(percent, 1), "%")),
+    hjust = -0.1,
+    size = 3.5,
+    fontface = "bold",
+    color = "gray20"
+  ) +
+  
+  coord_flip() +
+  
+  scale_fill_manual(values = my_palette) +
+  
+  scale_y_continuous(
+    labels = function(x) paste0(x, "%"),
+    expand = expansion(mult = c(0, 0.12))
+  ) +
+  
+  labs(
+    title = "Percentage of Users Who Want Children",
+    subtitle = "dropped N/A and Prefer not to answer Responses",
+    x = NULL,
+    y = NULL,
+  ) +
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(
+      face = "bold",
+      size = 18,
+      hjust = 0.5,
+      color = "gray10"
+    ),
+    
+    plot.subtitle = element_text(
+      size = 11,
+      hjust = 0.5,
+      color = "gray40",
+      margin = margin(b = 15)
+    ),
+    
+    axis.text.y = element_text(
+      size = 11,
+      face = "bold",
+      color = "gray20"
+    ),
+    
+    axis.text.x = element_text(
+      color = "gray35"
+    ),
+    
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    
+    panel.grid.major.x = element_line(
+      color = "gray88",
+      linewidth = 0.4
+    ),
+    
+    plot.background = element_rect(
+      fill = "white",
+      color = NA
+    )
+  )
+```
+
+```{r Have Children, echo=FALSE}
+havekiddf <- stupiddf3 %>%
+  dplyr::count(HaveChildren)
+havekiddf$HaveChildren[is.na(havekiddf$HaveChildren)] <- "No Response"
+havekiddf <- havekiddf %>%
+  mutate(percent = n / sum(n) * 100)
+
+ggplot(
+  havekiddf,
+  aes(x = HaveChildren, y = percent, fill = HaveChildren)
+) +
+  
+  geom_col(width = 0.7, show.legend = FALSE) +
+  
+  geom_text(
+    aes(label = paste0(round(percent, 1), "%")),
+    hjust = -0.1,
+    size = 3.5,
+    fontface = "bold",
+    color = "gray20"
+  ) +
+  
+  coord_flip() +
+  
+  scale_fill_manual(values = my_palette) +
+  
+  scale_y_continuous(
+    labels = function(x) paste0(x, "%"),
+    expand = expansion(mult = c(0, 0.12))
+  ) +
+  
+  labs(
+    title = "Percentage of Users Who Have Children",
+    x = NULL,
+    y = "Percent of Users"
+  ) +
+  
+  theme_minimal(base_size = 13) +
+  
+  theme(
+    plot.title = element_text(
+      face = "bold",
+      size = 18,
+      hjust = 0.5,
+      color = "gray10"
+    ),
+    
+    plot.subtitle = element_text(
+      size = 11,
+      hjust = 0.5,
+      color = "gray40",
+      margin = margin(b = 15)
+    ),
+    
+    axis.text.y = element_text(
+      size = 11,
+      face = "bold",
+      color = "gray20"
+    ),
+    
+    axis.text.x = element_text(
+      color = "gray35"
+    ),
+    
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    
+    panel.grid.major.x = element_line(
+      color = "gray88",
+      linewidth = 0.4
+    ),
+    
+    plot.background = element_rect(
+      fill = "white",
+      color = NA
+    )
+  )
+```
+:::
+
+:::

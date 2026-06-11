@@ -1,0 +1,85 @@
+---
+editor: visual
+---
+
+```{r}
+#| include: false
+source("setup.R")
+```
+
+::: {.callout-note title="Helpful Tips"}
+You can hover your mouse above "About Me" column entries to read the full text associated with the profile. The formatting of this table is a work in progress.
+:::
+
+```{r, echo=FALSE}
+stupiddftable <- stupiddf3 %>%
+  select(-...1)
+#change n/a to "no response" in character columns, not numeric
+stupiddftable$MembershipType[is.na(stupiddftable$MembershipType)] <- "-"
+stupiddftable$MaritalStatus[is.na(stupiddftable$MaritalStatus)] <- "-"
+stupiddftable$WantChildren[is.na(stupiddftable$WantChildren)] <- "-"
+stupiddftable$HaveChildren[is.na(stupiddftable$HaveChildren)] <- "-"
+stupiddftable$City[is.na(stupiddftable$City)] <- "-"
+stupiddftable$`State/Region`[is.na(stupiddftable$`State/Region`)] <- "-"
+stupiddftable$Country[is.na(stupiddftable$Country)] <- "-"
+stupiddftable$Country[is.na(stupiddftable$Country)] <- "-"
+stupiddftable$AstrologicalSign[is.na(stupiddftable$AstrologicalSign)] <- "-"
+stupiddftable$Zipcode[is.na(stupiddftable$Zipcode)] <- "-"
+stupiddftable$AboutMe[is.na(stupiddftable$AboutMe)] <- "-"
+stupiddftable$EducationLevel[is.na(stupiddftable$EducationLevel)] <- "-"
+stupiddftable$Income[is.na(stupiddftable$Income)] <- "-"
+stupiddftable$TestedIQ[is.na(stupiddftable$TestedIQ)] <- "-"
+stupiddftable$MyersBriggs[is.na(stupiddftable$MyersBriggs)] <- "-"
+stupiddftable$LookingFor[is.na(stupiddftable$LookingFor)] <- "-"
+stupiddftable$PoliticalOrientaion[is.na(stupiddftable$PoliticalOrientaion)] <- "-"
+stupiddftable$Diet[is.na(stupiddftable$Diet)] <- "-"
+stupiddftable$Ancestry[is.na(stupiddftable$Ancestry)] <- "-"
+stupiddftable$Race[is.na(stupiddftable$Race)] <- "-"
+stupiddftable$HumanPhenotypes[is.na(stupiddftable$HumanPhenotypes)] <- "-"
+stupiddftable$BodyType[is.na(stupiddftable$BodyType)] <- "-"
+stupiddftable$Hair[is.na(stupiddftable$Hair)] <- "-"
+stupiddftable$Height[is.na(stupiddftable$Height)] <- "-"
+stupiddftable$EyeColor[is.na(stupiddftable$EyeColor)] <- "-"
+stupiddftable$BestFeatures[is.na(stupiddftable$BestFeatures)] <- "-"
+stupiddftable$Tattoos[is.na(stupiddftable$Tattoos)] <- "-"
+stupiddftable$BloodType[is.na(stupiddftable$BloodType)] <- "-"
+stupiddftable$Language[is.na(stupiddftable$Language)] <- "-"
+stupiddftable$Interests[is.na(stupiddftable$Interests)] <- "-"
+stupiddftable$StanceOnVaccination[is.na(stupiddftable$StanceOnVaccination)] <- "-"
+stupiddftable$Polygyny[is.na(stupiddftable$Polygyny)] <- "-"
+stupiddftable$Piercings[is.na(stupiddftable$Piercings)] <- "-"
+stupiddftable$LookingForInPerson[is.na(stupiddftable$LookingForInPerson)] <- "-"
+stupiddftable$Smoking[is.na(stupiddftable$Smoking)] <- "-"
+stupiddftable$GeographicFlexibility[is.na(stupiddftable$GeographicFlexibility)] <- "-"
+stupiddftable$FavoriteVacationSpot[is.na(stupiddftable$FavoriteVacationSpot)] <- "-"
+stupiddftable$IdealFirstDate[is.na(stupiddftable$IdealFirstDate)] <- "-"
+stupiddftable$HumanDesignType[is.na(stupiddftable$HumanDesignType)] <- "-"
+stupiddftable$PassionateAbout[is.na(stupiddftable$PassionateAbout)] <- "-"
+stupiddftable$Spirituality[is.na(stupiddftable$Spirituality)] <- "-"
+stupiddftable$Mindset[is.na(stupiddftable$Mindset)] <- "-"
+stupiddftable$Pets[is.na(stupiddftable$Pets)] <- "-"
+stupiddftable$Accomodation[is.na(stupiddftable$Accomodation)] <- "-"
+stupiddftable$Weight[is.na(stupiddftable$Weight)] <- "-"
+stupiddftable$ChildrenLivesWith[is.na(stupiddftable$ChildrenLivesWith)] <- "-"
+stupiddftable$Virginity[is.na(stupiddftable$Virginity)] <- "-"
+```
+
+```{r}
+truncate_with_tooltip <- function(x, n = 40) {
+  x <- as.character(x)
+  short <- ifelse(nchar(x) > n, paste0(substr(x, 1, n), "..."), x)
+  paste0("<span title='", x, "'>", short, "</span>")
+}
+
+stupiddftable2 <- stupiddftable %>%
+  mutate(
+    across(c(2, 16), truncate_with_tooltip)
+  )
+
+datatable(
+  stupiddftable2,
+  escape = FALSE,
+  filter = "top",
+  options = list(pageLength = 20)
+)
+```
