@@ -30,7 +30,7 @@ jobs:
             any::quarto
           cache-version: 1
 
-       - name: Render and Publish
+      - name: Render and Publish
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@://github.com"
