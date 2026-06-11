@@ -28,12 +28,13 @@ jobs:
           packages: |
             any::renv
             any::quarto
+            any::jsonlite
           cache-version: 1
 
       - name: Render and Publish
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@://github.com"
-          quarto publish gh-pages --no-prompt
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+          R_PROFILE_USER: "" # Forces Quarto to inherit the global R package library paths
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
