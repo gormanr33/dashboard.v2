@@ -30,8 +30,10 @@ jobs:
             any::quarto
           cache-version: 1
 
-      - name: Render and Publish
+       - name: Render and Publish
         run: |
-          Rscript -e "renv::run(system('quarto publish gh-pages --no-prompt'))"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@://github.com"
+          quarto publish gh-pages --no-prompt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

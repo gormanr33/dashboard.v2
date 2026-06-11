@@ -1,7 +1,6 @@
 ---
-title:
+title: "About This Project"
 ---
-About This Project
 
 ::: {.card title="Background"}
 In January 2026, a hacker collective called **Martha Root** leaked data from the far-right white supremacist dating website **whitedate.net**, a platform that described itself as a site for “Europids seeking tribal love.”.
