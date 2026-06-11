@@ -9,6 +9,8 @@ library(htmltools)
 library(here)
 library(DT)
 library(readr)
+library(knitr)
+library(rmarkdown)
 
 # Global knitr options
 knitr::opts_chunk$set(
