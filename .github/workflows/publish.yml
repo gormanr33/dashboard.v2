@@ -32,7 +32,6 @@ jobs:
 
       - name: Render and Publish
         run: |
-          Rscript -e "renv::run(quarto::quarto_publish(target = 'gh-pages', server = 'github-pages'))"
+          Rscript -e "renv::run(system('quarto publish gh-pages --no-prompt'))"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
