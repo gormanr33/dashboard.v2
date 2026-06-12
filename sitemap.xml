@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://gormanr33.github.io/dashboard.v2/map.html</loc>
-    <lastmod>2026-06-12T00:55:52.377Z</lastmod>
-  </url>
-  <url>
-    <loc>https://gormanr33.github.io/dashboard.v2/descriptors.html</loc>
-    <lastmod>2026-06-12T00:55:52.266Z</lastmod>
-  </url>
-  <url>
-    <loc>https://gormanr33.github.io/dashboard.v2/datingquestions.html</loc>
-    <lastmod>2026-06-12T00:55:52.266Z</lastmod>
-  </url>
-  <url>
-    <loc>https://gormanr33.github.io/dashboard.v2/datatable.html</loc>
-    <lastmod>2026-06-12T00:55:52.266Z</lastmod>
-  </url>
-  <url>
-    <loc>https://gormanr33.github.io/dashboard.v2/demographics.html</loc>
-    <lastmod>2026-06-12T00:55:52.266Z</lastmod>
+    <loc>https://gormanr33.github.io/dashboard.v2/test.html</loc>
+    <lastmod>2026-06-12T01:12:58.704Z</lastmod>
   </url>
   <url>
     <loc>https://gormanr33.github.io/dashboard.v2/index.html</loc>
-    <lastmod>2026-06-12T00:55:52.377Z</lastmod>
+    <lastmod>2026-06-12T01:12:58.700Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gormanr33.github.io/dashboard.v2/demographics.html</loc>
+    <lastmod>2026-06-12T01:12:58.604Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gormanr33.github.io/dashboard.v2/datatable.html</loc>
+    <lastmod>2026-06-12T01:12:58.604Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gormanr33.github.io/dashboard.v2/datingquestions.html</loc>
+    <lastmod>2026-06-12T01:12:58.604Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gormanr33.github.io/dashboard.v2/descriptors.html</loc>
+    <lastmod>2026-06-12T01:12:58.604Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gormanr33.github.io/dashboard.v2/map.html</loc>
+    <lastmod>2026-06-12T01:12:58.700Z</lastmod>
   </url>
 </urlset>
