@@ -27,5 +27,7 @@ format:
   html:
     theme:
       - lumen
-    css: styles.css
+      - theme.scss
+    css: styles.scss
     toc: true
+    smooth-scroll: true

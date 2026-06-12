@@ -6,9 +6,9 @@ editor: visual
 #| include: false
 source("setup.R")
 ```
-:::{.columns}
 
-::: {.column width=45%}
+::::: columns
+::: {.column width="45%"}
 ```{r Marital Status, echo=FALSE}
 #Create new data frame to drop "group forums only" (unsure of what that means), combine redundant categories
 maritaldf <- stupiddf3 %>%
@@ -43,10 +43,7 @@ ggplot(
   )
 ) +
   
-  geom_col(
-    width = 0.7,
-    show.legend = FALSE
-  ) +
+  geom_col(width = 0.7, show.legend = FALSE) +
   
   geom_text(
     aes(label = label),
@@ -63,9 +60,7 @@ ggplot(
     limits = c(0, max(maritaldf_plot$pct) * 1.15)
   ) +
   
-  scale_fill_manual(
-    values = my_palette
-  ) +
+  scale_fill_manual(values = my_palette) +
   
   labs(
     title = "Marital Status of Users",
@@ -73,48 +68,7 @@ ggplot(
     y = "Percent of Users"
   ) +
   
-  theme_minimal(base_size = 14) +
-  
-  theme(
-    plot.title = element_text(
-      face = "bold",
-      size = 20,
-      color = "#111827"
-    ),
-    
-    axis.title.y = element_blank(),
-    
-    axis.title.x = element_text(
-      size = 12,
-      color = "#374151",
-      margin = margin(t = 10)
-    ),
-    
-    axis.text = element_text(
-      size = 11,
-      color = "#374151"
-    ),
-    
-    panel.grid.major.y = element_blank(),
-    panel.grid.minor = element_blank(),
-    
-    panel.grid.major.x = element_line(
-      color = "#E5E7EB",
-      linewidth = 0.5
-    ),
-    
-    panel.background = element_rect(
-      fill = "white",
-      color = NA
-    ),
-    
-    plot.background = element_rect(
-      fill = "white",
-      color = NA
-    ),
-    
-    plot.margin = margin(20, 20, 20, 20)
-  )
+  theme_site()
 ```
 
 ```{r Looking For, echo=FALSE}
@@ -158,50 +112,11 @@ ggplot(lookingfordf, aes(x = LookingFor, y = percent, fill = LookingFor)) +
     y = NULL
   ) +
   
-  theme_minimal(base_size = 13) +
-  
-  theme(
-    plot.title = element_text(
-      face = "bold",
-      size = 18,
-      hjust = 0.5,
-      color = "gray10"
-    ),
-    
-    plot.subtitle = element_text(
-      size = 11,
-      hjust = 0.5,
-      color = "gray40",
-      margin = margin(b = 15)
-    ),
-    
-    axis.text.y = element_text(
-      size = 11,
-      face = "bold",
-      color = "gray20"
-    ),
-    
-    axis.text.x = element_text(
-      color = "gray35"
-    ),
-    
-    panel.grid.major.y = element_blank(),
-    panel.grid.minor = element_blank(),
-    
-    panel.grid.major.x = element_line(
-      color = "gray88",
-      linewidth = 0.4
-    ),
-    
-    plot.background = element_rect(
-      fill = "white",
-      color = NA
-    )
-  )
+  theme_site()
 ```
 :::
 
-::: {.column width=45%}
+::: {.column width="45%"}
 ```{r Want Children, echo=FALSE}
 #drop n/a values from chart, regroup 
 wantkiddf <- stupiddf3 %>%
@@ -265,49 +180,10 @@ ggplot(
     title = "Percentage of Users Who Want Children",
     subtitle = "dropped N/A and Prefer not to answer Responses",
     x = NULL,
-    y = NULL,
+    y = NULL
   ) +
   
-  theme_minimal(base_size = 13) +
-  
-  theme(
-    plot.title = element_text(
-      face = "bold",
-      size = 18,
-      hjust = 0.5,
-      color = "gray10"
-    ),
-    
-    plot.subtitle = element_text(
-      size = 11,
-      hjust = 0.5,
-      color = "gray40",
-      margin = margin(b = 15)
-    ),
-    
-    axis.text.y = element_text(
-      size = 11,
-      face = "bold",
-      color = "gray20"
-    ),
-    
-    axis.text.x = element_text(
-      color = "gray35"
-    ),
-    
-    panel.grid.major.y = element_blank(),
-    panel.grid.minor = element_blank(),
-    
-    panel.grid.major.x = element_line(
-      color = "gray88",
-      linewidth = 0.4
-    ),
-    
-    plot.background = element_rect(
-      fill = "white",
-      color = NA
-    )
-  )
+  theme_site()
 ```
 
 ```{r Have Children, echo=FALSE}
@@ -347,47 +223,7 @@ ggplot(
     y = "Percent of Users"
   ) +
   
-  theme_minimal(base_size = 13) +
-  
-  theme(
-    plot.title = element_text(
-      face = "bold",
-      size = 18,
-      hjust = 0.5,
-      color = "gray10"
-    ),
-    
-    plot.subtitle = element_text(
-      size = 11,
-      hjust = 0.5,
-      color = "gray40",
-      margin = margin(b = 15)
-    ),
-    
-    axis.text.y = element_text(
-      size = 11,
-      face = "bold",
-      color = "gray20"
-    ),
-    
-    axis.text.x = element_text(
-      color = "gray35"
-    ),
-    
-    panel.grid.major.y = element_blank(),
-    panel.grid.minor = element_blank(),
-    
-    panel.grid.major.x = element_line(
-      color = "gray88",
-      linewidth = 0.4
-    ),
-    
-    plot.background = element_rect(
-      fill = "white",
-      color = NA
-    )
-  )
+  theme_site()
 ```
 :::
-
-:::
+:::::

@@ -7,9 +7,8 @@ editor: visual
 source("setup.R")
 ```
 
-:::{.columns}
-
-::: {.column width=45%}
+:::: columns
+::: {.column width="45%"}
 ```{r Astrological Sign, echo=FALSE}
 #Create new data frame to drop "n/a" responses, Create symbol map 
 astro_plot <- stupiddf3 %>%
@@ -135,52 +134,12 @@ ggplot(iqdf, aes(x = TestedIQ, y = percent, fill = percent)) +
   
   labs(
     title = "Tested IQ Scores",
-    subtitle = "Percentage of users by tested IQ scores category",
+    subtitle = "Percentage of users by tested IQ score category",
     x = NULL,
     y = NULL
   ) +
   
-  theme_minimal(base_size = 13) +
-  
-  theme(
-    plot.title = element_text(
-      face = "bold",
-      size = 18,
-      hjust = 0.5,
-      color = "gray10"
-    ),
-    
-    plot.subtitle = element_text(
-      size = 11,
-      hjust = 0.5,
-      color = "gray40",
-      margin = margin(b = 15)
-    ),
-    
-    axis.text.y = element_text(
-      size = 11,
-      face = "bold",
-      color = "gray20"
-    ),
-    
-    axis.text.x = element_text(
-      color = "gray35"
-    ),
-    
-    panel.grid.major.y = element_blank(),
-    panel.grid.minor = element_blank(),
-    
-    panel.grid.major.x = element_line(
-      color = "gray88",
-      linewidth = 0.4
-    ),
-    
-    plot.background = element_rect(
-      fill = "white",
-      color = NA
-    )
-  )
+  theme_site()
 ```
 :::
-
-:::
+::::

@@ -1,0 +1,160 @@
+/*-- scss:defaults --*/
+
+// ============================
+// Brand Colors
+// ============================
+
+$primary: #14B8A6;
+$secondary: #8B5CF6;
+
+$success: #14B8A6;
+$info: #38BDF8;
+$warning: #FBBF24;
+$danger: #EF4444;
+
+$body-bg: #ffffff;
+$body-color: #2c3e50;
+
+$link-color: $primary;
+$link-hover-color: darken($primary, 8%);
+
+$border-radius: .65rem;
+$border-radius-lg: .85rem;
+
+$font-family-sans-serif:
+  "Inter",
+  "Segoe UI",
+  "Helvetica Neue",
+  Arial,
+  sans-serif;
+
+$headings-font-weight: 600;
+
+$code-color: #8B5CF6;
+
+$btn-border-radius: .65rem;
+
+
+/*-- scss:rules --*/
+
+// ============================
+// Typography (responsive)
+// ============================
+
+body {
+  font-size: clamp(1rem, 1vw, 1.1rem);
+  line-height: 1.7;
+}
+
+// Headings
+h1 {
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+}
+
+h2 {
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+}
+
+h1, h2, h3, h4 {
+  color: $primary;
+  margin-top: 2rem;
+}
+
+// ============================
+// Links
+// ============================
+
+a {
+  transition: color .2s ease;
+}
+
+a:hover {
+  color: darken($primary, 8%);
+}
+
+// ============================
+// Buttons
+// ============================
+
+.btn {
+  transition: all .2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+// ============================
+// Cards
+// ============================
+
+.card {
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,.05);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0,0,0,.08);
+}
+
+// ============================
+// Tables
+// ============================
+
+.table {
+  border-radius: .75rem;
+  overflow: hidden;
+}
+
+.table-responsive {
+  border-radius: .75rem;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background: rgba(20, 184, 166, .05);
+}
+
+// ============================
+// Code blocks
+// ============================
+
+pre {
+  border-radius: .75rem;
+}
+
+// ============================
+// Images
+// ============================
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// ============================
+// Navigation
+// ============================
+
+.navbar {
+  box-shadow: 0 2px 12px rgba(0,0,0,.05);
+}
+
+// ============================
+// Footer
+// ============================
+
+.nav-footer {
+  margin-top: 5rem;
+}
+
+// ============================
+// Text selection
+// ============================
+
+::selection {
+  background: $primary;
+  color: white;
+}
