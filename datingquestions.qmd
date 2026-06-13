@@ -150,6 +150,12 @@ wantkiddf_plot <- ggplot(
   theme_site()
 
 #G4 Has Kids
+
+havekiddf <- stupiddf3 %>%
+  mutate(HaveChildren = tidyr::replace_na(HaveChildren, "No Response")) %>%
+  dplyr::count(HaveChildren) %>%
+  mutate(percent = n / sum(n) * 100)
+
 havekiddf_plot <- ggplot(
   havekiddf,
   aes(x = HaveChildren, y = percent, fill = HaveChildren)
