@@ -83,37 +83,15 @@ lookingfordf <- lookingfordf %>%
   ) %>%
   arrange(percent)
 
-ggplot(lookingfordf, aes(x = LookingFor, y = percent, fill = LookingFor)) +
-  
+lookingfordf_plot <- ggplot(lookingfordf, aes(x = LookingFor, y = percent, fill = LookingFor)) +
   geom_col(width = 0.72, show.legend = FALSE) +
-  
   geom_text(
     aes(label = paste0(round(percent, 1), "%")),
-    hjust = -0.15,
-    size = 4.2,
-    fontface = "bold",
-    color = "gray15"
+    hjust = -0.15
   ) +
-  
   coord_flip() +
-  
   scale_fill_manual(values = my_palette) +
-  
-  scale_y_continuous(
-    labels = function(x) paste0(x, "%"),
-    expand = expansion(mult = c(0, 0.12))
-  ) +
-  
-  labs(
-    title = "What Users Are Looking For in a Relationship",
-    subtitle = "Percentage of users by relationship preference",
-    x = NULL,
-    y = NULL
-  ) +
-  
   theme_site()
-
-# -- ROW 2 -- #
 
 #G3 Wants Kids
 #drop n/a values from chart, regroup 
@@ -190,37 +168,16 @@ havekiddf$HaveChildren[is.na(havekiddf$HaveChildren)] <- "No Response"
 havekiddf <- havekiddf %>%
   mutate(percent = n / sum(n) * 100)
 
-ggplot(
-  havekiddf,
-  aes(x = HaveChildren, y = percent, fill = HaveChildren)
-) +
-  
+havekiddf_plot <- ggplot(havekiddf, aes(x = HaveChildren, y = percent, fill = HaveChildren)) +
   geom_col(width = 0.7, show.legend = FALSE) +
-  
   geom_text(
     aes(label = paste0(round(percent, 1), "%")),
-    hjust = -0.1,
-    size = 3.5,
-    fontface = "bold",
-    color = "gray20"
+    hjust = -0.1
   ) +
-  
   coord_flip() +
-  
   scale_fill_manual(values = my_palette) +
-  
-  scale_y_continuous(
-    labels = function(x) paste0(x, "%"),
-    expand = expansion(mult = c(0, 0.12))
-  ) +
-  
-  labs(
-    title = "Percentage of Users Who Have Children",
-    x = NULL,
-    y = "Percent of Users"
-  ) +
-  
   theme_site()
+
 ```
 
 ::: {.columns}
@@ -240,11 +197,11 @@ wantkiddf_plot
 ::: {.column width="50%"}
 
 ```{r}
-lookingfordf
+lookingfordf_plot
 ```
 
 ```{r}
-havekiddf
+havekiddf_plot
 ```
 
 :::

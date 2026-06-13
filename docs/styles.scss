@@ -34,22 +34,6 @@
   display: flex;
 }
 
-/* Make plots look clickable */
-.cell-output-display img {
-  cursor: zoom-in;
-  transition: transform .15s ease;
-}
-
-.cell-output-display img:hover {
-  transform: scale(1.02);
-}
-
-/* Space between figures in Quarto layout panels */
-.quarto-layout-panel {
-  row-gap: 2rem;
-  column-gap: 2rem;
-}
-
 /* ========================= */
 /* Mobile */
 /* ========================= */
