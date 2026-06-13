@@ -14,6 +14,13 @@
     "text": "NoteHelpful Tips\n\n\n\nYou can hover your mouse above “About Me” column entries to read the full text associated with the profile. The formatting of this table is a work in progress."
   },
   {
+    "objectID": "datingquestions.html",
+    "href": "datingquestions.html",
+    "title": "dashboard.v2",
+    "section": "",
+    "text": "# A tibble: 7 × 4\n  MaritalStatus_clean     n     pct label\n  &lt;chr&gt;               &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;\n1 Divorced              734 0.0913  9.1% \n2 Engaged                30 0.00373 0.4% \n3 In Relationship        54 0.00671 0.7% \n4 Married                92 0.0114  1.1% \n5 Separated             225 0.0280  2.8% \n6 Single               6755 0.840   84.0%\n7 Widowed               153 0.0190  1.9% \n\n\n\n\n# A tibble: 4 × 4\n  WantChildren_clean              n percent label   \n  &lt;chr&gt;                       &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;   \n1 Has Children                    4  0.0501 5.0%    \n2 Undecided                     400  5.01   500.5%  \n3 Do not wish to procreate      491  6.14   614.4%  \n4 Would like to have children  7097 88.8    8 880.1%\n\n\n\n\n\n# A tibble: 5 × 3\n  LookingFor                            n percent\n  &lt;fct&gt;                             &lt;int&gt;   &lt;dbl&gt;\n1 Platonic friendships only             7  0.0863\n2 Just friendship, maybe more later    66  0.814 \n3 The mother/father of my children    437  5.39  \n4 Something slow and serious          996 12.3   \n5 No Response                        6605 81.4   \n\n\n\n\n# A tibble: 7 × 3\n  HaveChildren                     n percent\n  &lt;chr&gt;                        &lt;int&gt;   &lt;dbl&gt;\n1 I do not have children (yet)  6579  80.9  \n2 I have 1 child                 727   8.94 \n3 I have 2 children              440   5.41 \n4 I have 3 children              155   1.91 \n5 I have 4 children               76   0.935\n6 I have more than 4 children     47   0.578\n7 No Response                    106   1.30"
+  },
+  {
     "objectID": "map.html",
     "href": "map.html",
     "title": "dashboard.v2",
