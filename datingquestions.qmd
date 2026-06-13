@@ -50,21 +50,15 @@ maritaldf_plot <- ggplot(
   coord_flip() +
   scale_y_continuous(labels = scales::percent_format()) +
   scale_fill_manual(values = my_palette) +
+  labs(
+    title = "Marital Status of Users",
+    x = NULL,
+    y = "Percent"
+  ) +
   theme_site()
 
 # Looking For
 #create new data frame, replace "NA" values w "No Response", drop "Groups and forums activity"
-lookingfordf <- stupiddf3 %>%
-  dplyr::count(LookingFor)
-lookingfordf$LookingFor[is.na(lookingfordf$LookingFor)] <- "No Response"
-lookingfordf <- lookingfordf %>%
-  filter(LookingFor != "Groups and forums activity") %>%
-  mutate(
-    percent = n / sum(n) * 100,
-    LookingFor = forcats::fct_reorder(LookingFor, percent)
-  ) %>%
-  arrange(percent)
-
 lookingfordf_plot <- ggplot(
   lookingfordf,
   aes(x = LookingFor, y = percent, fill = LookingFor)
@@ -76,6 +70,11 @@ lookingfordf_plot <- ggplot(
   ) +
   coord_flip() +
   scale_fill_manual(values = my_palette) +
+  labs(
+    title = "What Users Are Looking For in a Relationship",
+    x = NULL,
+    y = "Percent"
+  ) +
   theme_site()
 
 #G3 Wants Kids
@@ -140,12 +139,6 @@ wantkiddf_plot <- ggplot(
   theme_site()
 
 #G4 Has Kids
-havekiddf <- stupiddf3 %>%
-  dplyr::count(HaveChildren)
-havekiddf$HaveChildren[is.na(havekiddf$HaveChildren)] <- "No Response"
-havekiddf <- havekiddf %>%
-  mutate(percent = n / sum(n) * 100)
-
 havekiddf_plot <- ggplot(
   havekiddf,
   aes(x = HaveChildren, y = percent, fill = HaveChildren)
@@ -157,6 +150,11 @@ havekiddf_plot <- ggplot(
   ) +
   coord_flip() +
   scale_fill_manual(values = my_palette) +
+  labs(
+    title = "Do Users Have Children?",
+    x = NULL,
+    y = "Percent"
+  ) +
   theme_site()
 
 ```
