@@ -1,0 +1,17 @@
+{
+  "hash": "e1af9dbdb9d43a932ee177334d892052",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\neditor: visual\n---\n\n\n\n\n::: {.cell layout-ncol=\"2\"}\n::: {.cell-output-display}\n![](test_files/figure-html/unnamed-chunk-2-1.png){width=2100}\n:::\n\n::: {.cell-output-display}\n![](test_files/figure-html/unnamed-chunk-2-2.png){width=2100}\n:::\n:::\n\n",
+    "supporting": [
+      "test_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -14,6 +14,31 @@ source("setup.R")
 #| fig-height: 4.5
 #| out-width: "100%"
 
+# Astrology
+astro_plot <- stupiddf3 %>%
+  filter(AstrologicalSign !="No Response") %>%
+  dplyr::count(AstrologicalSign) %>%
+  mutate(
+    pct = n / sum(n),
+    label = AstrologicalSign
+  )
+symbol_map <- c(
+  "Aries" = "♈ ",
+  "Taurus" = "♉ ",
+  "Gemini" = "♊ ",
+  "Cancer" = "♋ ",
+  "Leo" = "♌ ",
+  "Virgo" = "♍ ",
+  "Libra" = "♎ ",
+  "Scorpio" = "♏ ",
+  "Sagittarius" = "♐ ",
+  "Capricorn" = "♑ ",
+  "Aquarius" = "♒ ",
+  "Pisces" = "♓ "
+  
+)
+astro_plot$AstrologicalSign <- symbol_map[astro_plot$AstrologicalSign]
+
 # Build the astrology plot
 astro_plot_fig <- ggplot(astro_plot, aes(x = 2, y = pct, fill = AstrologicalSign)) +
   geom_col(width = 1, color = "white") +
@@ -37,6 +62,29 @@ astro_plot_fig <- ggplot(astro_plot, aes(x = 2, y = pct, fill = AstrologicalSign
   theme_void(base_size = 14) +
   theme(
     legend.position = "none"
+  )
+
+# IQDF
+iqdf <- stupiddf3 %>%
+  dplyr::count(TestedIQ)
+iqdf$TestedIQ[is.na(iqdf$TestedIQ)] <- "No Response"
+#clean + order factor
+iqdf <- iqdf %>%
+  mutate(
+    percent = n / sum(n) * 100,
+    
+    TestedIQ = factor(
+      TestedIQ,
+      levels = c(
+        "No Response",
+        "80-99",
+        "100-119",
+        "120-139",
+        "140-159",
+        "160-179",
+        "over 180"
+      )
+    )
   )
 
 # Build the IQ plot

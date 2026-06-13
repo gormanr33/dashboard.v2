@@ -71,6 +71,29 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  document.querySelectorAll(".cell-output-display img").forEach(function(img) {
+
+    if (img.parentElement.tagName.toLowerCase() === "a") return;
+
+    const link = document.createElement("a");
+    link.href = img.src;
+    link.className = "glightbox";
+
+    img.parentNode.insertBefore(link, img);
+    link.appendChild(img);
+
+  });
+
+  GLightbox();
+});
+</script>
 
 
 <link rel="stylesheet" href="styles.scss">
@@ -116,6 +139,10 @@ ul.task-list li input[type="checkbox"] {
   <li class="nav-item">
     <a class="nav-link" href="./datatable.html"> 
 <span class="menu-text">Data Table</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./test.html"> 
+<span class="menu-text">TEST</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
