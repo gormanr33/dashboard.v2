@@ -57,8 +57,19 @@ maritaldf_plot <- ggplot(
   ) +
   theme_site()
 
-# Looking For
+# Looking For 
 #create new data frame, replace "NA" values w "No Response", drop "Groups and forums activity"
+
+lookingfordf <- stupiddf3 %>%
+  mutate(LookingFor = tidyr::replace_na(LookingFor, "No Response")) %>%
+  filter(LookingFor != "Groups and forums activity") %>%
+  dplyr::count(LookingFor) %>%
+  mutate(
+    percent = n / sum(n) * 100,
+    LookingFor = forcats::fct_reorder(LookingFor, percent)
+  ) %>%
+  arrange(percent)
+
 lookingfordf_plot <- ggplot(
   lookingfordf,
   aes(x = LookingFor, y = percent, fill = LookingFor)
