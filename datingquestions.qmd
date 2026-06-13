@@ -34,7 +34,7 @@ maritaldf_plot <- maritaldf %>%
     label = scales::percent(pct, accuracy = 0.1)
   )
 
-ggplot(
+maritaldf_plot <- ggplot(
   maritaldf_plot,
   aes(
     x = reorder(MaritalStatus_clean, pct),
@@ -42,32 +42,14 @@ ggplot(
     fill = MaritalStatus_clean
   )
 ) +
-  
   geom_col(width = 0.7, show.legend = FALSE) +
-  
   geom_text(
     aes(label = label),
-    hjust = -0.15,
-    size = 4,
-    fontface = "bold",
-    color = "#374151"
+    hjust = -0.15
   ) +
-  
   coord_flip() +
-  
-  scale_y_continuous(
-    labels = scales::percent_format(),
-    limits = c(0, max(maritaldf_plot$pct) * 1.15)
-  ) +
-  
+  scale_y_continuous(labels = scales::percent_format()) +
   scale_fill_manual(values = my_palette) +
-  
-  labs(
-    title = "Marital Status of Users",
-    x = NULL,
-    y = "Percent of Users"
-  ) +
-  
   theme_site()
 
 # Looking For
@@ -83,7 +65,10 @@ lookingfordf <- lookingfordf %>%
   ) %>%
   arrange(percent)
 
-lookingfordf_plot <- ggplot(lookingfordf, aes(x = LookingFor, y = percent, fill = LookingFor)) +
+lookingfordf_plot <- ggplot(
+  lookingfordf,
+  aes(x = LookingFor, y = percent, fill = LookingFor)
+) +
   geom_col(width = 0.72, show.legend = FALSE) +
   geom_text(
     aes(label = paste0(round(percent, 1), "%")),
@@ -128,13 +113,11 @@ wantkiddf_plot <- wantkiddf %>%
   ) %>%
   arrange(percent)
 
-ggplot(
+wantkiddf_plot <- ggplot(
   wantkiddf_plot,
   aes(x = WantChildren_clean, y = percent, fill = WantChildren_clean)
 ) +
-  
   geom_col(width = 0.7, show.legend = FALSE) +
-  
   geom_text(
     aes(label = paste0(round(percent, 1), "%")),
     hjust = -0.1,
@@ -142,23 +125,18 @@ ggplot(
     fontface = "bold",
     color = "gray20"
   ) +
-  
   coord_flip() +
-  
   scale_fill_manual(values = my_palette) +
-  
   scale_y_continuous(
     labels = function(x) paste0(x, "%"),
     expand = expansion(mult = c(0, 0.12))
   ) +
-  
   labs(
     title = "Percentage of Users Who Want Children",
-    subtitle = "dropped N/A and Prefer not to answer Responses",
+    subtitle = "Grouped responses (excluding N/A)",
     x = NULL,
     y = NULL
   ) +
-  
   theme_site()
 
 #G4 Has Kids
@@ -168,7 +146,10 @@ havekiddf$HaveChildren[is.na(havekiddf$HaveChildren)] <- "No Response"
 havekiddf <- havekiddf %>%
   mutate(percent = n / sum(n) * 100)
 
-havekiddf_plot <- ggplot(havekiddf, aes(x = HaveChildren, y = percent, fill = HaveChildren)) +
+havekiddf_plot <- ggplot(
+  havekiddf,
+  aes(x = HaveChildren, y = percent, fill = HaveChildren)
+) +
   geom_col(width = 0.7, show.legend = FALSE) +
   geom_text(
     aes(label = paste0(round(percent, 1), "%")),
@@ -180,30 +161,22 @@ havekiddf_plot <- ggplot(havekiddf, aes(x = HaveChildren, y = percent, fill = Ha
 
 ```
 
-::: {.columns}
-
-::: {.column width="50%"}
+::: {.plot-grid}
 
 ```{r}
 maritaldf_plot
 ```
 
 ```{r}
-wantkiddf_plot
+lookingfordf_plot
 ```
 
-:::
-
-::: {.column width="50%"}
-
 ```{r}
-lookingfordf_plot
+wantkiddf_plot
 ```
 
 ```{r}
 havekiddf_plot
 ```
-
-:::
 
 :::
