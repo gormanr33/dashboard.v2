@@ -7,9 +7,6 @@ editor: visual
 source("setup.R")
 ```
 
-::: {.columns}
-
-::: {.column width ="50%"}
 ```{r}
 #Astrology
 
@@ -59,12 +56,7 @@ astro_plot_fig <- ggplot(astro_plot, aes(x = 2, y = pct, fill = AstrologicalSign
   ) +
   theme_void(base_size = 14) +
   theme(legend.position = "none")
-```
 
-:::
-
-::: {.column width ="50%"}
-```{r}
 # IQ
 
 iqdf <- stupiddf3 %>%
@@ -101,9 +93,19 @@ iq_plot_fig <- ggplot(iqdf, aes(x = TestedIQ, y = percent, fill = percent)) +
     high = "#8B5CF6"
   ) +
   theme_site()
+```
 
-# patchwork
-astro_plot_fig | iq_plot_fig
+::: {.columns}
+
+::: {.column width="50%"}
+```{r}
+astro_plot_fig
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+iq_plot_fig
 ```
 :::
 
