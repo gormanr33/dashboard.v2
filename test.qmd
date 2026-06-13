@@ -8,40 +8,16 @@ source("setup.R")
 ```
 
 ```{r}
-#| layout-ncol: 2
+#| fig-show: hold
+#| fig-ncol: 2
+#| fig-width: 6
+#| fig-height: 4.5
+#| out-width: "100%"
 
-#ASTOLOGY
-#Create new data frame to drop "n/a" responses, Create symbol map 
-astro_plot <- stupiddf3 %>%
-  filter(AstrologicalSign !="No Response") %>%
-  dplyr::count(AstrologicalSign) %>%
-  mutate(
-    pct = n / sum(n),
-    label = AstrologicalSign
-  )
-symbol_map <- c(
-  "Aries" = "♈ ",
-  "Taurus" = "♉ ",
-  "Gemini" = "♊ ",
-  "Cancer" = "♋ ",
-  "Leo" = "♌ ",
-  "Virgo" = "♍ ",
-  "Libra" = "♎ ",
-  "Scorpio" = "♏ ",
-  "Sagittarius" = "♐ ",
-  "Capricorn" = "♑ ",
-  "Aquarius" = "♒ ",
-  "Pisces" = "♓ "
-  
-)
-astro_plot$AstrologicalSign <- symbol_map[astro_plot$AstrologicalSign]
-
-ggplot(astro_plot, aes(x = 2, y = pct, fill = AstrologicalSign)) +
-  
+# Build the astrology plot
+astro_plot_fig <- ggplot(astro_plot, aes(x = 2, y = pct, fill = AstrologicalSign)) +
   geom_col(width = 1, color = "white") +
-  
   coord_polar(theta = "y") +
-  
   geom_text(
     aes(label = AstrologicalSign),
     position = position_stack(vjust = 0.5),
@@ -49,95 +25,35 @@ ggplot(astro_plot, aes(x = 2, y = pct, fill = AstrologicalSign)) +
     color = "white",
     fontface = "bold"
   ) +
-  
   scale_fill_manual(values = c(
     "#2563EB", "#14B8A6", "#F59E0B", "#EC4899",
     "#8B5CF6", "#06B6D4", "#84CC16", "#F97316",
     "#6366F1", "#EF4444", "#0EA5E9", "#A855F7"
   )) +
-  
   labs(
     title = "Distribution of Astrological Signs",
     subtitle = "32% of respondents did not report an astrological sign"
   ) +
-  
   theme_void(base_size = 14) +
-  
   theme(
-    plot.title = element_text(
-      face = "bold",
-      size = 20,
-      color = "#111827",
-      hjust = 0.5
-    ),
-    
-    plot.subtitle = element_text(
-      size = 12,
-      color = "#6B7280",
-      hjust = 0.5,
-      margin = margin(b = 10)
-    ),
-    
-    legend.position = "none",
-    
-    plot.background = element_rect(
-      fill = "white",
-      color = NA
-    )
+    legend.position = "none"
   )
 
-# IQDF
-iqdf <- stupiddf3 %>%
-  dplyr::count(TestedIQ)
-iqdf$TestedIQ[is.na(iqdf$TestedIQ)] <- "No Response"
-#clean + order factor
-iqdf <- iqdf %>%
-  mutate(
-    percent = n / sum(n) * 100,
-    
-    TestedIQ = factor(
-      TestedIQ,
-      levels = c(
-        "No Response",
-        "80-99",
-        "100-119",
-        "120-139",
-        "140-159",
-        "160-179",
-        "over 180"
-      )
-    )
-  )
-ggplot(iqdf, aes(x = TestedIQ, y = percent, fill = percent)) +
-  
+# Build the IQ plot
+iq_plot_fig <- ggplot(iqdf, aes(x = TestedIQ, y = percent, fill = percent)) +
   geom_col(width = 0.72, show.legend = FALSE) +
-  
   geom_text(
     aes(label = paste0(round(percent, 1), "%")),
-    hjust = -0.15,
-    size = 4.3,
-    fontface = "bold",
-    color = "gray15"
+    hjust = -0.15
   ) +
-  
   coord_flip() +
-  
   scale_fill_gradient(
     low = "#E9D5FF",
     high = "#8B5CF6"
   ) +
-  
-  scale_y_continuous(
-    labels = function(x) paste0(x, "%"),
-    expand = expansion(mult = c(0, 0.12))
-  ) +
-  
-  labs(
-    title = "Tested IQ Scores",
-    subtitle = "Percentage of users by tested IQ score category",
-    x = NULL,
-    y = NULL
-  ) +
-  
   theme_site()
+
+# Print both plots
+astro_plot_fig
+iq_plot_fig
 ```
