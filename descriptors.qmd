@@ -9,20 +9,16 @@ source("setup.R")
 
 
 ```{r}
-#| fig-show: hold
-#| fig-ncol: 2
-#| fig-width: 6
-#| fig-height: 4.5
-#| out-width: "100%"
+#Astrology
 
-# Astrology
 astro_plot <- stupiddf3 %>%
-  filter(AstrologicalSign !="No Response") %>%
+  filter(AstrologicalSign != "No Response") %>%
   dplyr::count(AstrologicalSign) %>%
   mutate(
     pct = n / sum(n),
     label = AstrologicalSign
   )
+
 symbol_map <- c(
   "Aries" = "♈ ",
   "Taurus" = "♉ ",
@@ -36,11 +32,10 @@ symbol_map <- c(
   "Capricorn" = "♑ ",
   "Aquarius" = "♒ ",
   "Pisces" = "♓ "
-  
 )
+
 astro_plot$AstrologicalSign <- symbol_map[astro_plot$AstrologicalSign]
 
-# Build the astrology plot
 astro_plot_fig <- ggplot(astro_plot, aes(x = 2, y = pct, fill = AstrologicalSign)) +
   geom_col(width = 1, color = "white") +
   coord_polar(theta = "y") +
@@ -61,19 +56,18 @@ astro_plot_fig <- ggplot(astro_plot, aes(x = 2, y = pct, fill = AstrologicalSign
     subtitle = "32% of respondents did not report an astrological sign"
   ) +
   theme_void(base_size = 14) +
-  theme(
-    legend.position = "none"
-  )
+  theme(legend.position = "none")
 
-# IQDF
+# IQ
+
 iqdf <- stupiddf3 %>%
   dplyr::count(TestedIQ)
+
 iqdf$TestedIQ[is.na(iqdf$TestedIQ)] <- "No Response"
-#clean + order factor
+
 iqdf <- iqdf %>%
   mutate(
     percent = n / sum(n) * 100,
-    
     TestedIQ = factor(
       TestedIQ,
       levels = c(
@@ -88,7 +82,6 @@ iqdf <- iqdf %>%
     )
   )
 
-# Build the IQ plot
 iq_plot_fig <- ggplot(iqdf, aes(x = TestedIQ, y = percent, fill = percent)) +
   geom_col(width = 0.72, show.legend = FALSE) +
   geom_text(
@@ -101,8 +94,20 @@ iq_plot_fig <- ggplot(iqdf, aes(x = TestedIQ, y = percent, fill = percent)) +
     high = "#8B5CF6"
   ) +
   theme_site()
+```
 
-# Print both plots
+::: {.columns}
+
+::: {.column width="50%"}
+```{r}
 astro_plot_fig
+```
+:::
+
+::: {.column width="50%"}
+```{r}
 iq_plot_fig
 ```
+:::
+
+:::
