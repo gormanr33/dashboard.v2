@@ -11,6 +11,9 @@ library(DT)
 library(readr)
 library(knitr)
 library(rmarkdown)
+library(ggplot2)
+library(dplyr)
+library(patchwork)
 
 ## Global knitr options
 knitr::opts_chunk$set(
