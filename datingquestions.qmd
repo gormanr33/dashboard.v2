@@ -7,9 +7,13 @@ editor: visual
 source("setup.R")
 ```
 
-::::: columns
-::: {.column width="45%"}
-```{r Marital Status, echo=FALSE}
+```{r}
+#| layout-ncol: 2
+#| fig-width: 5
+#| fig-height: 4
+
+# -- ROW 1 -- #
+#G1 Marital Status
 #Create new data frame to drop "group forums only" (unsure of what that means), combine redundant categories
 maritaldf <- stupiddf3 %>%
   mutate(MaritalStatus_clean = case_when(
@@ -69,9 +73,8 @@ ggplot(
   ) +
   
   theme_site()
-```
 
-```{r Looking For, echo=FALSE}
+#G2 Looking For
 #create new data frame, replace "NA" values w "No Response", drop "Groups and forums activity"
 lookingfordf <- stupiddf3 %>%
   dplyr::count(LookingFor)
@@ -113,11 +116,10 @@ ggplot(lookingfordf, aes(x = LookingFor, y = percent, fill = LookingFor)) +
   ) +
   
   theme_site()
-```
-:::
 
-::: {.column width="45%"}
-```{r Want Children, echo=FALSE}
+# -- ROW 2 -- #
+
+#G3 Wants Kids
 #drop n/a values from chart, regroup 
 wantkiddf <- stupiddf3 %>%
   dplyr::count(WantChildren)
@@ -184,9 +186,8 @@ ggplot(
   ) +
   
   theme_site()
-```
 
-```{r Have Children, echo=FALSE}
+#G4 Has Kids
 havekiddf <- stupiddf3 %>%
   dplyr::count(HaveChildren)
 havekiddf$HaveChildren[is.na(havekiddf$HaveChildren)] <- "No Response"
@@ -225,5 +226,3 @@ ggplot(
   
   theme_site()
 ```
-:::
-:::::

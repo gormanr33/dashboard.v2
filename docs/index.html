@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>OkStupid Dashboard – dashboard.v2</title>
+<title>About This Project – dashboard.v2</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-267efaf477eec0fe62d4fb3579b721f4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b32c73fd2ea38e7e2f8cfbd0ebd76aea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,9 +70,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.scss">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -116,6 +117,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./datatable.html"> 
 <span class="menu-text">Data Table</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./test.html"> 
+<span class="menu-text">TEST</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -135,7 +140,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">OkStupid Dashboard</h1>
+<h1 class="title">About This Project</h1>
 </div>
 
 
@@ -152,7 +157,6 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>About This Project</p>
 <div class="card" title="Background">
 <p>In January 2026, a hacker collective called <strong>Martha Root</strong> leaked data from the far-right white supremacist dating website <strong>whitedate.net</strong>, a platform that described itself as a site for “Europids seeking tribal love.”.</p>
 <p>“Europids” is a term commonly used in white supremacist and eugenicist spaces. The language reflects racist beliefs that race is biologically fixed and hierarchical, a sentiment that is quite common in modern far-right extremist communities.</p>
@@ -458,7 +462,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/gormanr33\.github\.io\/dashboard\.v2\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -790,4 +794,5 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

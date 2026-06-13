@@ -7,9 +7,13 @@ editor: visual
 source("setup.R")
 ```
 
-::::: columns
-::: {.column width="45%"}
-```{r age, echo=FALSE}
+```{r}
+#| layout-ncol: 2
+#| fig-width: 5
+#| fig-height: 4
+
+# -- ROW 1 -- #
+#G1 : Age
 ggplot(stupiddf3, aes(x = Age)) +
   
   geom_histogram(
@@ -31,9 +35,7 @@ ggplot(stupiddf3, aes(x = Age)) +
   
   theme_site()
 
-```
-
-```{r Gender, echo=FALSE}
+#G2 Gender
 # Create summary table with percentages
 gender_df <- stupiddf3 %>%
   dplyr::count(Gender) %>%
@@ -69,11 +71,8 @@ ggplot(gender_df, aes(x = Gender, y = n, fill = Gender)) +
   
   theme_site()
 
-```
-:::
-
-::: {.column width="45%"}
-```{r Income Leve, echo=FALSE}
+# -- ROW 2 -- #
+#G3
 #create new data frame, replace "NA" values w "No Response"
 incomedf <- stupiddf3 %>%
   dplyr::count(Income)
@@ -170,9 +169,8 @@ ggplot(incomedf, aes(x = Income, y = percent, fill = percent)) +
       color = NA
     )
   )
-```
 
-```{r Education Level, echo=FALSE}
+#G4
 #create new data frame, replace "NA" values w "No Response"
 educdf <- stupiddf3 %>%
   dplyr::count(EducationLevel)
@@ -229,5 +227,3 @@ ggplot(educdf, aes(x = EducationLevel, y = percent, fill = percent)) +
   
   theme_site()
 ```
-:::
-:::::

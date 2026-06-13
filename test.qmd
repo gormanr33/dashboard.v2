@@ -7,7 +7,10 @@ editor: visual
 source("setup.R")
 ```
 
-```{r Astrological Sign, echo=FALSE}
+```{r}
+#| layout-ncol: 2
+
+#ASTOLOGY
 #Create new data frame to drop "n/a" responses, Create symbol map 
 astro_plot <- stupiddf3 %>%
   filter(AstrologicalSign !="No Response") %>%
@@ -82,9 +85,8 @@ ggplot(astro_plot, aes(x = 2, y = pct, fill = AstrologicalSign)) +
       color = NA
     )
   )
-```
 
-```{r tested IQ, echo=FALSE}
+# IQDF
 iqdf <- stupiddf3 %>%
   dplyr::count(TestedIQ)
 iqdf$TestedIQ[is.na(iqdf$TestedIQ)] <- "No Response"

@@ -1,0 +1,67 @@
+/* styles.scss */
+
+/* Cards */
+.card {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+/* Callouts */
+.callout-note {
+  border-left: 5px solid #14B8A6;
+}
+
+.callout-tip {
+  border-left: 5px solid #8B5CF6;
+}
+
+/* Tables */
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background: rgba(20, 184, 166, .05);
+}
+
+/* Text selection */
+::selection {
+  background: #14B8A6;
+  color: white;
+}
+
+/* Hero layout base */
+.hero-layout {
+  display: flex;
+}
+
+/* ========================= */
+/* Mobile */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+  .hero-layout {
+    flex-direction: column;
+  }
+
+  .hero-image {
+    margin-bottom: 2rem;
+  }
+
+  .hero-text {
+    text-align: center;
+  }
+
+  .table {
+    font-size: .9rem;
+  }
+
+  h1 {
+    margin-top: 1rem;
+  }
+
+  body {
+    font-size: .95rem;
+  }
+
+}
