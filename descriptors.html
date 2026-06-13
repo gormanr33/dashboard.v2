@@ -71,6 +71,29 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  document.querySelectorAll(".cell-output-display img").forEach(function(img) {
+
+    if (img.parentElement.tagName.toLowerCase() === "a") return;
+
+    const link = document.createElement("a");
+    link.href = img.src;
+    link.className = "glightbox";
+
+    img.parentNode.insertBefore(link, img);
+    link.appendChild(img);
+
+  });
+
+  GLightbox();
+});
+</script>
 
 
 <link rel="stylesheet" href="styles.scss">
@@ -137,13 +160,19 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="cell quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="descriptors_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="2100"></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="descriptors_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="2100"></p>
+</figure>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="descriptors_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="2100"></p>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="descriptors_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="2100"></p>
+</figure>
 </div>
 </div>
 </div>
