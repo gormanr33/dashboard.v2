@@ -8,7 +8,10 @@ source("setup.R")
 ```
 
 ```{r}
-#| layout-ncol: 2
+#| layout: [[47.5, -5, 47.5]]
+#| fig-width: 6
+#| fig-height: 4.5
+#| out-width: "100%"
 
 #ASTOLOGY
 #Create new data frame to drop "n/a" responses, Create symbol map 
