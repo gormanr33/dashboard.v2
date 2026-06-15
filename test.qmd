@@ -176,21 +176,22 @@ havekiddf_plot <- ggplot(
 
 ```
 
-::: {.row gx-5}
-
-::: {.col-md-6}
+::: {layout-ncol=2}
 
 ```{r}
 maritaldf_plot
+```
+
+```{r}
 lookingfordf_plot
 ```
-:::
 
-::: {.col-md-6}
 ```{r}
 wantkiddf_plot
+```
+
+```{r}
 havekiddf_plot
 ```
-:::
 
 :::
