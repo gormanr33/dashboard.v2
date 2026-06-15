@@ -44,11 +44,14 @@ maritaldf_plot <- ggplot(
 ) +
   geom_col(width = 0.7, show.legend = FALSE) +
   geom_text(
-    aes(label = label),
-    hjust = -0.15
-  ) +
+  aes(label = label),
+  hjust = 1.05
+) +
   coord_flip() +
-  scale_y_continuous(labels = scales::percent_format()) +
+  scale_y_continuous(
+  labels = scales::percent_format(),
+  expand = expansion(mult = c(0, 0.15))
+) +
   scale_fill_manual(values = my_palette) +
   labs(
     title = "Marital Status of Users",
@@ -179,29 +182,29 @@ havekiddf_plot <- ggplot(
 ::: {layout-ncol=2}
 
 ```{r}
-#| fig-width: 5
-#| fig-height: 4
+#| fig-width: 4
+#| fig-height: 3.5
 #| out-width: "100%"
 maritaldf_plot
 ```
 
 ```{r}
-#| fig-width: 5
-#| fig-height: 4
+#| fig-width: 4
+#| fig-height: 3.5
 #| out-width: "100%"
 lookingfordf_plot
 ```
 
 ```{r}
-#| fig-width: 5
-#| fig-height: 4
+#| fig-width: 4
+#| fig-height: 3.5
 #| out-width: "100%"
 wantkiddf_plot
 ```
 
 ```{r}
-#| fig-width: 5
-#| fig-height: 4
+#| fig-width: 4
+#| fig-height: 3.5
 #| out-width: "100%"
 havekiddf_plot
 ```
