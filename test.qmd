@@ -179,18 +179,30 @@ havekiddf_plot <- ggplot(
 ::: {layout-ncol=2}
 
 ```{r}
+#| fig-width: 5
+#| fig-height: 4
+#| out-width: "100%"
 maritaldf_plot
 ```
 
 ```{r}
+#| fig-width: 5
+#| fig-height: 4
+#| out-width: "100%"
 lookingfordf_plot
 ```
 
 ```{r}
+#| fig-width: 5
+#| fig-height: 4
+#| out-width: "100%"
 wantkiddf_plot
 ```
 
 ```{r}
+#| fig-width: 5
+#| fig-height: 4
+#| out-width: "100%"
 havekiddf_plot
 ```
 
