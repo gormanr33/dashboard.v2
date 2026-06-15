@@ -176,6 +176,7 @@ havekiddf_plot <- ggplot(
 
 ```
 
+::::: {.columns-gap}
 ::::: columns
 ::: {.column width="50%"}
 
@@ -191,4 +192,5 @@ wantkiddf_plot
 havekiddf_plot
 ```
 :::
+:::::
 :::::
