@@ -7,7 +7,6 @@ editor: visual
 source("setup.R")
 ```
 
-
 ```{r}
 #Astrology
 
@@ -96,8 +95,7 @@ iq_plot_fig <- ggplot(iqdf, aes(x = TestedIQ, y = percent, fill = percent)) +
   theme_site()
 ```
 
-::: {.columns}
-
+::::: columns
 ::: {.column width="50%"}
 ```{r}
 astro_plot_fig
@@ -109,5 +107,4 @@ astro_plot_fig
 iq_plot_fig
 ```
 :::
-
-:::
+:::::
