@@ -78,17 +78,28 @@ lookingfordf_plot <- ggplot(
   aes(x = LookingFor, y = percent, fill = LookingFor)
 ) +
   geom_col(width = 0.72, show.legend = FALSE) +
+
   geom_text(
     aes(label = paste0(round(percent, 1), "%")),
-    hjust = -0.15
+    hjust = 1.05,
+    size = 3
   ) +
+
   coord_flip() +
+
+  scale_y_continuous(
+    labels = scales::percent_format(),
+    expand = expansion(mult = c(0, 0.15))
+  ) +
+
   scale_fill_manual(values = my_palette) +
+
   labs(
     title = "What Users Are Looking For in a Relationship",
     x = NULL,
     y = "Percent"
   ) +
+
   theme_site()
 
 #G3 Wants Kids
@@ -121,35 +132,44 @@ wantkiddf <- stupiddf3 %>%
 wantkiddf_plot <- wantkiddf %>%
   dplyr::count(WantChildren_clean) %>%
   mutate(
-    percent = n / sum(n) * 100,
-    label = percent(percent, accuracy = 0.1)
+    percent = n / sum(n) * 100
   ) %>%
   arrange(percent)
 
 wantkiddf_plot <- ggplot(
   wantkiddf_plot,
-  aes(x = WantChildren_clean, y = percent, fill = WantChildren_clean)
+  aes(
+    x = WantChildren_clean,
+    y = percent,
+    fill = WantChildren_clean
+  )
 ) +
   geom_col(width = 0.7, show.legend = FALSE) +
+
   geom_text(
     aes(label = paste0(round(percent, 1), "%")),
-    hjust = -0.1,
-    size = 3.5,
-    fontface = "bold",
-    color = "gray20"
+    hjust = 1.05,
+    size = 3,
+    color = "gray20",
+    fontface = "bold"
   ) +
+
   coord_flip() +
+
   scale_fill_manual(values = my_palette) +
+
   scale_y_continuous(
     labels = function(x) paste0(x, "%"),
-    expand = expansion(mult = c(0, 0.12))
+    expand = expansion(mult = c(0, 0.15))
   ) +
+
   labs(
     title = "Percentage of Users Who Want Children",
     subtitle = "Grouped responses (excluding N/A)",
     x = NULL,
     y = NULL
   ) +
+
   theme_site()
 
 #G4 Has Kids
@@ -161,20 +181,37 @@ havekiddf <- stupiddf3 %>%
 
 havekiddf_plot <- ggplot(
   havekiddf,
-  aes(x = HaveChildren, y = percent, fill = HaveChildren)
+  aes(
+    x = HaveChildren,
+    y = percent,
+    fill = HaveChildren
+  )
 ) +
   geom_col(width = 0.7, show.legend = FALSE) +
+
   geom_text(
     aes(label = paste0(round(percent, 1), "%")),
-    hjust = -0.1
+    hjust = 1.05,
+    size = 3,
+    color = "gray20",
+    fontface = "bold"
   ) +
+
   coord_flip() +
+
   scale_fill_manual(values = my_palette) +
+
+  scale_y_continuous(
+    labels = function(x) paste0(x, "%"),
+    expand = expansion(mult = c(0, 0.15))
+  ) +
+
   labs(
     title = "Do Users Have Children?",
     x = NULL,
-    y = "Percent"
+    y = NULL
   ) +
+
   theme_site()
 
 ```
