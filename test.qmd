@@ -176,9 +176,9 @@ havekiddf_plot <- ggplot(
 
 ```
 
-::::: {.columns-gap}
-::::: columns
-::: {.column width="50%"}
+::: {.row gx-5}
+
+::: {.col-md-6}
 
 ```{r}
 maritaldf_plot
@@ -186,11 +186,11 @@ lookingfordf_plot
 ```
 :::
 
-::: {.column width="50%"}
+::: {.col-md-6}
 ```{r}
 wantkiddf_plot
 havekiddf_plot
 ```
 :::
-:::::
-:::::
+
+:::
