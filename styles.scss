@@ -34,11 +34,11 @@
   display: flex;
 }
 
-.plot-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  align-items: start;
+/* columns gap */
+.columns-gap {
+  .columns {
+    gap: 2rem;
+  }
 }
 
 /* ========================= */
