@@ -189,11 +189,12 @@ havekiddf_plot <- ggplot(
 ) +
   geom_col(width = 0.7, show.legend = FALSE) +
 
+  # Put text INSIDE bars (safe for all layouts)
   geom_text(
     aes(label = paste0(round(percent, 1), "%")),
-    hjust = 1.05,
+    position = position_stack(vjust = 0.5),
     size = 3,
-    color = "gray20",
+    color = "white",
     fontface = "bold"
   ) +
 
@@ -203,7 +204,7 @@ havekiddf_plot <- ggplot(
 
   scale_y_continuous(
     labels = function(x) paste0(x, "%"),
-    expand = expansion(mult = c(0, 0.15))
+    expand = expansion(mult = c(0, 0.05))
   ) +
 
   labs(
@@ -212,7 +213,12 @@ havekiddf_plot <- ggplot(
     y = NULL
   ) +
 
-  theme_site()
+  theme_site() +
+  
+  # CRITICAL FIX: give plot breathing room inside grid layouts
+  theme(
+    plot.margin = margin(10, 25, 10, 10)
+  )
 
 ```
 
