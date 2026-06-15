@@ -35,10 +35,8 @@
 }
 
 /* columns gap */
-.columns-gap {
-  .columns {
-    gap: 2rem;
-  }
+.columns-gap > .columns {
+  gap: 2rem;
 }
 
 /* ========================= */
