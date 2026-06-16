@@ -14,6 +14,7 @@ library(rmarkdown)
 library(ggplot2)
 library(dplyr)
 library(patchwork)
+library(tippy)
 
 ## Global knitr options
 knitr::opts_chunk$set(

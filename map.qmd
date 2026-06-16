@@ -7,6 +7,10 @@ editor: visual
 source("setup.R")
 ```
 
+::: {.callout-note title="About the Map: Missing Data"}
+The map shows 1,338 users out of a total sample of 8,130. At first, I thought this was a data processing error in the latitude and longitude cleaning or import into R. After verifying the original JSON file, it became clear that the missing coordinates are not due to processing issues and that the source data itself is missing latitude and longitude information for 6,792 users.
+:::
+
 ```{r, echo=FALSE}
 #make new data frame for map
 mapdf <- stupiddf3 %>%
@@ -55,7 +59,3 @@ leaflet(mapdf, width = "100%", height = 500) %>%
     clusterOptions = markerClusterOptions()
   )
 ```
-
-::: {.callout-note title="About the Map: Missing Data"}
-The map shows 1,338 users out of a total sample of 8,130. At first, I thought this was a data processing error in the latitude and longitude cleaning or import into R. After verifying the original JSON file, it became clear that the missing coordinates are not due to processing issues and that the source data itself is missing latitude and longitude information for 6,792 users.
-:::
