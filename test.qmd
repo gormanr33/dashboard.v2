@@ -97,7 +97,7 @@ lookingfordf_plot <- ggplot(
   ) +
   scale_fill_manual(values = my_palette) +
   labs(
-    title = "What Users Are Looking For in a Relationship",
+    title = "What Are Users Looking For?",
     x = NULL,
     y = "Percent"
   ) +
@@ -160,7 +160,7 @@ wantkiddf_plot <- ggplot(
   ) +
   scale_fill_manual(values = my_palette) +
   labs(
-    title = "Percentage of Users Who Want Children",
+    title = "Do Users Want Children?",
     subtitle = "Grouped responses (excluding N/A)",
     x = NULL,
     y = NULL

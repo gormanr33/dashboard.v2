@@ -28,34 +28,40 @@ maritaldf <- stupiddf3 %>%
   filter(MaritalStatus_clean != "Groups Forums Only")
 
 maritaldf_plot <- maritaldf %>%
-  dplyr::count(MaritalStatus_clean) %>%
+  count(MaritalStatus_clean) %>%
   mutate(
-    pct = n / sum(n),
-    label = scales::percent(pct, accuracy = 0.1)
+    percent = n / sum(n) * 100
   )
 
 maritaldf_plot <- ggplot(
   maritaldf_plot,
   aes(
-    x = reorder(MaritalStatus_clean, pct),
-    y = pct,
+    x = reorder(MaritalStatus_clean, percent),
+    y = percent,
     fill = MaritalStatus_clean
   )
 ) +
   geom_col(width = 0.7, show.legend = FALSE) +
   geom_text(
-    aes(label = label),
-    hjust = -0.15
+    aes(label = sprintf("%.1f%%", percent)),
+    hjust = -0.15,
+    size = 3
   ) +
   coord_flip() +
-  scale_y_continuous(labels = scales::percent_format()) +
+  scale_y_continuous(
+    labels = function(x) paste0(x, "%"),
+    expand = expansion(mult = c(0, 0.20))
+  ) +
   scale_fill_manual(values = my_palette) +
   labs(
     title = "Marital Status of Users",
     x = NULL,
     y = "Percent"
   ) +
-  theme_site()
+  theme_site() +
+  theme(
+    plot.margin = margin(10, 20, 10, 10)
+  )
 
 # Looking For 
 #create new data frame, replace "NA" values w "No Response", drop "Groups and forums activity"
@@ -72,21 +78,33 @@ lookingfordf <- stupiddf3 %>%
 
 lookingfordf_plot <- ggplot(
   lookingfordf,
-  aes(x = LookingFor, y = percent, fill = LookingFor)
+  aes(
+    x = LookingFor,
+    y = percent,
+    fill = LookingFor
+  )
 ) +
   geom_col(width = 0.72, show.legend = FALSE) +
   geom_text(
-    aes(label = paste0(round(percent, 1), "%")),
-    hjust = -0.15
+    aes(label = sprintf("%.1f%%", percent)),
+    hjust = -0.15,
+    size = 3
   ) +
   coord_flip() +
+  scale_y_continuous(
+    labels = function(x) paste0(x, "%"),
+    expand = expansion(mult = c(0, 0.20))
+  ) +
   scale_fill_manual(values = my_palette) +
   labs(
-    title = "What Users Are Looking For in a Relationship",
+    title = "What Are Users Looking For?",
     x = NULL,
     y = "Percent"
   ) +
-  theme_site()
+  theme_site() +
+  theme(
+    plot.margin = margin(10, 20, 10, 10)
+  )
 
 #G3 Wants Kids
 #drop n/a values from chart, regroup 
@@ -116,38 +134,41 @@ wantkiddf <- stupiddf3 %>%
   filter(WantChildren_clean !="No Response")
 
 wantkiddf_plot <- wantkiddf %>%
-  dplyr::count(WantChildren_clean) %>%
+  count(WantChildren_clean) %>%
   mutate(
-    percent = n / sum(n) * 100,
-    label = percent(percent, accuracy = 0.1)
-  ) %>%
-  arrange(percent)
+    percent = n / sum(n) * 100
+  )
 
 wantkiddf_plot <- ggplot(
   wantkiddf_plot,
-  aes(x = WantChildren_clean, y = percent, fill = WantChildren_clean)
+  aes(
+    x = WantChildren_clean,
+    y = percent,
+    fill = WantChildren_clean
+  )
 ) +
   geom_col(width = 0.7, show.legend = FALSE) +
   geom_text(
-    aes(label = paste0(round(percent, 1), "%")),
-    hjust = -0.1,
-    size = 3.5,
-    fontface = "bold",
-    color = "gray20"
+    aes(label = sprintf("%.1f%%", percent)),
+    hjust = -0.15,
+    size = 3
   ) +
   coord_flip() +
-  scale_fill_manual(values = my_palette) +
   scale_y_continuous(
     labels = function(x) paste0(x, "%"),
-    expand = expansion(mult = c(0, 0.12))
+    expand = expansion(mult = c(0, 0.20))
   ) +
+  scale_fill_manual(values = my_palette) +
   labs(
-    title = "Percentage of Users Who Want Children",
+    title = "Do Users Want Children?",
     subtitle = "Grouped responses (excluding N/A)",
     x = NULL,
     y = NULL
   ) +
-  theme_site()
+  theme_site() +
+  theme(
+    plot.margin = margin(10, 20, 10, 10)
+  )
 
 #G4 Has Kids
 
@@ -158,50 +179,62 @@ havekiddf <- stupiddf3 %>%
 
 havekiddf_plot <- ggplot(
   havekiddf,
-  aes(x = HaveChildren, y = percent, fill = HaveChildren)
+  aes(
+    x = HaveChildren,
+    y = percent,
+    fill = HaveChildren
+  )
 ) +
   geom_col(width = 0.7, show.legend = FALSE) +
   geom_text(
-    aes(label = paste0(round(percent, 1), "%")),
-    hjust = -0.1
+    aes(label = sprintf("%.1f%%", percent)),
+    hjust = -0.15,
+    size = 3
   ) +
   coord_flip() +
+  scale_y_continuous(
+    labels = function(x) paste0(x, "%"),
+    expand = expansion(mult = c(0, 0.20))
+  ) +
   scale_fill_manual(values = my_palette) +
   labs(
     title = "Do Users Have Children?",
     x = NULL,
-    y = "Percent"
+    y = NULL
   ) +
-  theme_site()
-
+  theme_site() +
+  theme(
+    plot.margin = margin(10, 20, 10, 10)
+  )
+  
 ```
 
-::: {.plot-grid}
+::: {layout-ncol=2}
 
 ```{r}
-#| fig-width: 5
-#| fig-height: 4
+#| fig-width: 5.5
+#| fig-height: 4.25
 #| out-width: "100%"
 maritaldf_plot
 ```
 
 ```{r}
-#| fig-width: 5
-#| fig-height: 4
+#| fig-width: 5.5
+#| fig-height: 4.25
 #| out-width: "100%"
 lookingfordf_plot
 ```
 
 ```{r}
-#| fig-width: 5
-#| fig-height: 4
+#| fig-width: 5.5
+#| fig-height: 4.25
 #| out-width: "100%"
 wantkiddf_plot
 ```
 
 ```{r}
-#| fig-width: 5
-#| fig-height: 4
+#| fig-width: 5.5
+#| fig-height: 4.25
 #| out-width: "100%"
 havekiddf_plot
 ```

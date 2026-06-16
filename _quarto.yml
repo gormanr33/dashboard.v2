@@ -21,8 +21,6 @@ website:
         text: Map
       - href: datatable.qmd
         text: Data Table
-      - href: test.qmd
-        text: TEST
 
 
 format:
