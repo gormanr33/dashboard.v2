@@ -1,60 +1,60 @@
----
-editor: visual
----
-
-```{r}
-#| include: false
-source("setup.R")
-```
-
 ```{r}
 
-#G1 Marital Status
-#Create new data frame to drop "group forums only" (unsure of what that means), combine redundant categories
-maritaldf <- stupiddf3 %>%
-  mutate(MaritalStatus_clean = case_when(
-    MaritalStatus == "Single, Divorced" ~ "Divorced",
-    MaritalStatus == "Single, Separated" ~ "Separated",
-    MaritalStatus == "Single, Widowed" ~ "Widowed",
-    MaritalStatus == "Divorced" ~ "Divorced",
-    MaritalStatus == "Separated" ~ "Separated",
-    MaritalStatus == "Widowed" ~ "Widowed",
-    MaritalStatus == "Single" ~ "Single",
-    MaritalStatus == "Engaged" ~ "Engaged",
-    MaritalStatus == "In Relationship" ~ "In Relationship",
-    MaritalStatus == "Married" ~ "Married",
-    MaritalStatus == "Groups Forums Only" ~ "Groups Forums Only"
-  )) %>%
-  filter(MaritalStatus_clean != "Groups Forums Only")
+# Age
+age_plot <- ggplot(
+  stupiddf3,
+  aes(x = Age)
+) +
+  geom_histogram(
+    binwidth = 3,
+    fill = "#8B5CF6",
+    color = "white",
+    alpha = 0.9
+  ) +
+  scale_x_continuous(
+    breaks = seq(15, 95, by = 10)
+  ) +
+  labs(
+    title = "Age Distribution of Users",
+    x = "Age",
+    y = "Count"
+  ) +
+  theme_site() +
+  theme(
+    plot.margin = margin(10, 20, 10, 10)
+  )
 
-maritaldf_plot <- maritaldf %>%
-  count(MaritalStatus_clean) %>%
+# Gender
+gender_df <- stupiddf3 %>%
+  count(Gender) %>%
   mutate(
     percent = n / sum(n) * 100
   )
 
-maritaldf_plot <- ggplot(
-  maritaldf_plot,
+gender_plot <- ggplot(
+  gender_df,
   aes(
-    x = reorder(MaritalStatus_clean, percent),
+    x = Gender,
     y = percent,
-    fill = MaritalStatus_clean
+    fill = Gender
   )
 ) +
-  geom_col(width = 0.7, show.legend = FALSE) +
+  geom_col(
+    width = 0.7,
+    show.legend = FALSE
+  ) +
   geom_text(
     aes(label = sprintf("%.1f%%", percent)),
-    hjust = -0.15,
-    size = 3
-  ) +
-  coord_flip() +
-  scale_y_continuous(
-    labels = function(x) paste0(x, "%"),
-    expand = expansion(mult = c(0, 0.20))
+    vjust = -0.4,
+    size = 3.5
   ) +
   scale_fill_manual(values = my_palette) +
+  scale_y_continuous(
+    labels = function(x) paste0(x, "%"),
+    expand = expansion(mult = c(0, 0.15))
+  ) +
   labs(
-    title = "Marital Status of Users",
+    title = "Gender of Users",
     x = NULL,
     y = "Percent"
   ) +
@@ -63,41 +63,60 @@ maritaldf_plot <- ggplot(
     plot.margin = margin(10, 20, 10, 10)
   )
 
-# Looking For 
-#create new data frame, replace "NA" values w "No Response", drop "Groups and forums activity"
+# Income
+incomedf <- stupiddf3 %>%
+  count(Income)
 
-lookingfordf <- stupiddf3 %>%
-  mutate(LookingFor = tidyr::replace_na(LookingFor, "No Response")) %>%
-  filter(LookingFor != "Groups and forums activity") %>%
-  dplyr::count(LookingFor) %>%
+incomedf$Income[is.na(incomedf$Income)] <- "No Response"
+
+incomedf <- incomedf %>%
   mutate(
     percent = n / sum(n) * 100,
-    LookingFor = forcats::fct_reorder(LookingFor, percent)
-  ) %>%
-  arrange(percent)
+    Income = factor(
+      Income,
+      levels = c(
+        "No Response",
+        "Studying",
+        "$/ 00-20k",
+        "$/ 20-40k",
+        "$/ 40-60k",
+        "$/ 60-80k",
+        "$/ 80-100k",
+        "$/100-120k",
+        "> $/120k"
+      )
+    )
+  )
 
-lookingfordf_plot <- ggplot(
-  lookingfordf,
+income_plot <- ggplot(
+  incomedf,
   aes(
-    x = LookingFor,
+    x = Income,
     y = percent,
-    fill = LookingFor
+    fill = percent
   )
 ) +
-  geom_col(width = 0.72, show.legend = FALSE) +
+  geom_col(
+    width = 0.72,
+    show.legend = FALSE
+  ) +
   geom_text(
     aes(label = sprintf("%.1f%%", percent)),
     hjust = -0.15,
     size = 3
   ) +
   coord_flip() +
+  scale_fill_gradient(
+    low = "#E9D5FF",
+    high = "#8B5CF6"
+  ) +
   scale_y_continuous(
     labels = function(x) paste0(x, "%"),
     expand = expansion(mult = c(0, 0.20))
   ) +
-  scale_fill_manual(values = my_palette) +
   labs(
-    title = "What Are Users Looking For?",
+    title = "Income Distribution",
+    subtitle = "Percentage of Users by Income Category",
     x = NULL,
     y = "Percent"
   ) +
@@ -106,107 +125,66 @@ lookingfordf_plot <- ggplot(
     plot.margin = margin(10, 20, 10, 10)
   )
 
-#G3 Wants Kids
-#drop n/a values from chart, regroup 
-wantkiddf <- stupiddf3 %>%
-  dplyr::count(WantChildren)
-wantkiddf$WantChildren[is.na(wantkiddf$WantChildren)] <- "No Response"
+# Educataion
+educdf <- stupiddf3 %>%
+  count(EducationLevel)
 
-wantkiddf <- stupiddf3 %>%
-  mutate(WantChildren_clean = case_when(
-    WantChildren == "Cannot have children" ~ "Do not wish to procreate",
-    WantChildren == "Do not wish to procreate" ~ "Do not wish to procreate",
-    WantChildren == "Do not wish to procreate (further)" ~ "Do not wish to procreate",
-    WantChildren == "I have one child" ~ "Has Children",
-    WantChildren == "I have three children" ~ "Has Children",
-    WantChildren == "I have two children" ~ "Has Children",
-    WantChildren == "Not yet but would like to" ~ "Would like to have children",
-    WantChildren == "Prefer not to say" ~ "No Response",
-    WantChildren == "Undecided" ~ "Undecided",
-    WantChildren == "Would like to have 1 child" ~ "Would like to have children",
-    WantChildren == "Would like to have 2 children" ~ "Would like to have children",
-    WantChildren == "Would like to have 3 children" ~ "Would like to have children",
-    WantChildren == "Would like to have 4 children" ~ "Would like to have children",
-    WantChildren == "Would like to have children" ~ "Would like to have children",
-    WantChildren == "Would like to have more than 4" ~ "Would like to have children",
-    WantChildren == "No Response" ~ "No Response",
-  )) %>%
-  filter(WantChildren_clean !="No Response")
+educdf$EducationLevel[is.na(educdf$EducationLevel)] <- "No Response"
 
-wantkiddf_plot <- wantkiddf %>%
-  count(WantChildren_clean) %>%
+educdf <- educdf %>%
   mutate(
-    percent = n / sum(n) * 100
+    percent = n / sum(n) * 100,
+    EducationLevel = factor(
+      EducationLevel,
+      levels = c(
+        "No Response",
+        "Diploma Level",
+        "High School",
+        "Bachelor Degree",
+        "Masters Degree",
+        "Doctorate",
+        "College Degree"
+      )
+    )
   )
 
-wantkiddf_plot <- ggplot(
-  wantkiddf_plot,
+education_plot <- ggplot(
+  educdf,
   aes(
-    x = WantChildren_clean,
+    x = EducationLevel,
     y = percent,
-    fill = WantChildren_clean
+    fill = percent
   )
 ) +
-  geom_col(width = 0.7, show.legend = FALSE) +
+  geom_col(
+    width = 0.72,
+    show.legend = FALSE
+  ) +
   geom_text(
     aes(label = sprintf("%.1f%%", percent)),
     hjust = -0.15,
     size = 3
   ) +
   coord_flip() +
+  scale_fill_gradient(
+    low = "#CCFBF1",
+    high = "#14B8A6"
+  ) +
   scale_y_continuous(
     labels = function(x) paste0(x, "%"),
     expand = expansion(mult = c(0, 0.20))
   ) +
-  scale_fill_manual(values = my_palette) +
   labs(
-    title = "Do Users Want Children?",
-    subtitle = "Grouped responses (excluding N/A)",
+    title = "Education Level Distribution",
+    subtitle = "Percentage of Users by Education Level",
     x = NULL,
-    y = NULL
+    y = "Percent"
   ) +
   theme_site() +
   theme(
     plot.margin = margin(10, 20, 10, 10)
   )
 
-#G4 Has Kids
-
-havekiddf <- stupiddf3 %>%
-  mutate(HaveChildren = tidyr::replace_na(HaveChildren, "No Response")) %>%
-  dplyr::count(HaveChildren) %>%
-  mutate(percent = n / sum(n) * 100)
-
-havekiddf_plot <- ggplot(
-  havekiddf,
-  aes(
-    x = HaveChildren,
-    y = percent,
-    fill = HaveChildren
-  )
-) +
-  geom_col(width = 0.7, show.legend = FALSE) +
-  geom_text(
-    aes(label = sprintf("%.1f%%", percent)),
-    hjust = -0.15,
-    size = 3
-  ) +
-  coord_flip() +
-  scale_y_continuous(
-    labels = function(x) paste0(x, "%"),
-    expand = expansion(mult = c(0, 0.20))
-  ) +
-  scale_fill_manual(values = my_palette) +
-  labs(
-    title = "Do Users Have Children?",
-    x = NULL,
-    y = NULL
-  ) +
-  theme_site() +
-  theme(
-    plot.margin = margin(10, 20, 10, 10)
-  )
-  
 ```
 
 ::: {layout-ncol=2}
@@ -215,28 +193,32 @@ havekiddf_plot <- ggplot(
 #| fig-width: 5.5
 #| fig-height: 4.25
 #| out-width: "100%"
-maritaldf_plot
+
+age_plot
 ```
 
 ```{r}
 #| fig-width: 5.5
 #| fig-height: 4.25
 #| out-width: "100%"
-lookingfordf_plot
+
+gender_plot
 ```
 
 ```{r}
 #| fig-width: 5.5
 #| fig-height: 4.25
 #| out-width: "100%"
-wantkiddf_plot
+
+income_plot
 ```
 
 ```{r}
 #| fig-width: 5.5
 #| fig-height: 4.25
 #| out-width: "100%"
-havekiddf_plot
+
+education_plot
 ```
 
 :::
