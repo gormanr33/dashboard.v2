@@ -68,3 +68,7 @@ stupiddftable$Virginity[is.na(stupiddftable$Virginity)] <- "-"
 #| echo: false
 datatable(stupiddftable, options = list(pageLength = 15))
 ```
+
+```{r}
+stupiddftable
+```
