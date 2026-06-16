@@ -31,7 +31,7 @@ format:
       - lumen
       - theme.scss
     css: styles.scss
-    toc: true
+    toc: false
     smooth-scroll: true
 
     include-in-header:
