@@ -69,58 +69,91 @@ stupiddftable$Virginity[is.na(stupiddftable$Virginity)] <- "-"
 
 #rename pseudonym displayed
 stupiddftable <- stupiddftable %>% rename(Pseudonym_Displayed = 'Pseudonym Displayed')
+
 ```
 
 ```{r}
 #| echo: false
+
 reactable(
   stupiddftable, 
   resizable = TRUE, 
+
   columns = list(
-    # Column 1: Activity with Tippy Tooltip
-    Activity = colDef(
-      cell = function(value) {
-        # Only attach a tooltip if there is actual text to display
-        if (is.na(value) || value == "") return("")
-        tippy(value, tooltip = value)
-      },
-      style = list(
-        whiteSpace = "nowrap", 
-        overflow = "hidden", 
-        textOverflow = "ellipsis"
-      )
-    ), 
-    
-    # Column 2: AboutMe with Tippy Tooltip
+
+    MembershipType = colDef(name = "Membership Type"),
+    Pseudonym_Displayed = colDef(name = "Pseudonym Displayed"),
+
+    Seeking_A = colDef(name = "Seeking A"),
+    MaritalStatus = colDef(name = "Marital Status"),
+    WantChildren = colDef(name = "Wants Children"),
+    HaveChildren = colDef(name = "Has Children"),
+
+    AstrologicalSign = colDef(name = "Astrological Sign"),
+
     AboutMe = colDef(
+      name = "About Me",
       cell = function(value) {
         if (is.na(value) || value == "") return("")
         tippy(value, tooltip = value)
       },
       style = list(
-        whiteSpace = "nowrap", 
-        overflow = "hidden", 
+        whiteSpace = "nowrap",
+        overflow = "hidden",
         textOverflow = "ellipsis"
       )
     ),
+
+    EducationLevel = colDef(name = "Education Level"),
+    TestedIQ = colDef(name = "I.Q. Score"),
+    MyersBriggs = colDef(name = "Myers-Briggs Type Indication"),
+    LookingFor = colDef(name = "Looking For"),
+    PoliticalOrientation = colDef(name = "Political Orientation"),
+    HumanPhenotypes = colDef(name = "Human Phenotypes"),
+    BodyType = colDef(name = "Body Type"),
+    EyeColor = colDef(name = "Eye Color"),
+    BestFeatures = colDef(name = "Best Features"),
+    BloodType = colDef(name = "Blood Type"),
+    StanceOnVaccination = colDef(name = "Stance on Vaccination"),
+    LookingForInPerson = colDef(name = "Looking for in a Person"),
+    GeographicFlexibility = colDef(name = "Geographic Flexibility"),
+    FavoriteVacationSpot = colDef(name = "Favorite Vacation Spot"),
+    IdealFirstDate = colDef(name = "Ideal First Date"),
+    HumanDesignType = colDef(name = "Human Design Type"),
+    PassionateAbout = colDef(name = "Passionate About"),
+    ChildrenLivesWith = colDef(name = "Lives with Children"),
+
+    Activity = colDef(
+      name = "Activity",
+      cell = function(value) {
+        if (is.na(value) || value == "") return("")
+        tippy(value, tooltip = value)
+      },
+      style = list(
+        whiteSpace = "nowrap",
+        overflow = "hidden",
+        textOverflow = "ellipsis"
+      )
+    ),
+
     Nickname = colDef(
-      # Show Pseudonym_Displayed under nickname
+      name = "Nickname",
       cell = JS('function(cellInfo) {
         const Pseudonym_Displayed = cellInfo.row["Pseudonym_Displayed"] || "Unknown"
         return `
           <div>
             <div style="font-weight: 600">${cellInfo.value}</div>
-            <div style="font-size: 0.75rem">${Pseudonym_Displayed}</div>
+            <div style="font-size: 0.75rem; opacity: 0.7">${Pseudonym_Displayed}</div>
           </div>
         `
       }'),
       html = TRUE
     ),
+
     Pseudonym_Displayed = colDef(show = FALSE)
   ),
-  # Vertically center cells
+
   defaultColDef = colDef(vAlign = "center"),
   defaultPageSize = 6
-    )
-
+)
 ```

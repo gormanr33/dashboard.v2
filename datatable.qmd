@@ -69,6 +69,36 @@ stupiddftable$Virginity[is.na(stupiddftable$Virginity)] <- "-"
 
 #rename pseudonym displayed
 stupiddftable <- stupiddftable %>% rename(Pseudonym_Displayed = 'Pseudonym Displayed')
+#create name map for columns
+names_map <- list(
+  MembershipType = "Membership Type",
+  Pseudonym_Displayed = "Pseudonym Displayed",
+  Seeking_A = "Seeking A",
+  MaritalStatus = "Marital Status",
+  WantChildren = "Wants Children",
+  HaveChildren = "Has Children",
+  AstrologicalSign = "Astrological Sign",
+  AboutMe = "About Me",
+  EducationLevel = "Education Level",
+  TestedIQ = "I.Q. Score",
+  MyersBriggs = "Myers-Briggs Type Indication",
+  LookingFor = "Looking For",
+  PoliticalOrientation = "Political Orientation",
+  HumanPhenotypes = "Human Phenotypes",
+  BodyType = "Body Type",
+  EyeColor = "Eye Color",
+  BestFeatures = "Best Features",
+  BloodType = "Blood Type",
+  StanceOnVaccination = "Stance on Vaccination",
+  LookingForInPerson = "Looking for in a Person",
+  GeographicFlexibility = "Geographic Flexibility",
+  FavoriteVacationSpot = "Favorite Vacation Spot",
+  IdealFirstDate = "Ideal First Date",
+  HumanDesignType = "Human Design Type",
+  PassionateAbout = "Passionate About",
+  ChildrenLivesWith = "Lives with Children"
+)
+
 ```
 
 ```{r}
@@ -122,4 +152,5 @@ reactable(
   defaultColDef = colDef(vAlign = "center"),
   defaultPageSize = 6
     )
+
 ```
