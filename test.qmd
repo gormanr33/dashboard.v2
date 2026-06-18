@@ -4,6 +4,8 @@ editor: visual
 format:
   html:
     page-layout: full
+    theme: theme.scss
+    css: styles.scss
 ---
 
 ```{r}
@@ -76,9 +78,9 @@ stupiddftable <- stupiddftable %>% rename(Pseudonym_Displayed = 'Pseudonym Displ
 #| echo: false
 
 reactable(
-  stupiddftable, 
-  resizable = TRUE, 
-
+  stupiddftable,
+  class = "my-table",
+  resizable = TRUE,
   columns = list(
 
     MembershipType = colDef(name = "Membership Type"),

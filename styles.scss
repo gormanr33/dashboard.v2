@@ -18,9 +18,37 @@
   border-left: 5px solid #8B5CF6;
 }
 
-/* Tables */
-.table-striped > tbody > tr:nth-of-type(odd) {
-  background: rgba(20, 184, 166, .05);
+/* Table container */
+.my-table {
+  font-family: $font-family-base;
+  border-radius: 12px;
+}
+
+/* Header styling */
+.my-table .rt-thead {
+  background-color: $primary;
+  color: white;
+  font-weight: 600;
+}
+
+/* Cell styling */
+.my-table .rt-td {
+  padding: 10px;
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Row striping */
+.my-table .rt-tr-group {
+  transition: background 0.15s ease;
+}
+
+.my-table .rt-tr-group:nth-child(odd) {
+  background: rgba($primary, 0.08);
+}
+
+/* Hover effect */
+.my-table .rt-tr-group:hover {
+  background: rgba($primary, 0.12);
 }
 
 /* Text selection */
