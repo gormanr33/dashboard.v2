@@ -1,5 +1,9 @@
 ---
 editor: visual
+
+format:
+  html:
+    page-layout: full
 ---
 
 ```{r}
@@ -62,6 +66,9 @@ stupiddftable$Accomodation[is.na(stupiddftable$Accomodation)] <- "-"
 stupiddftable$Weight[is.na(stupiddftable$Weight)] <- "-"
 stupiddftable$ChildrenLivesWith[is.na(stupiddftable$ChildrenLivesWith)] <- "-"
 stupiddftable$Virginity[is.na(stupiddftable$Virginity)] <- "-"
+
+#rename pseudonym displayed
+stupiddftable <- stupiddftable %>% rename(Pseudonym_Displayed = 'Pseudonym Displayed')
 ```
 
 ```{r}
@@ -97,19 +104,19 @@ reactable(
       )
     ),
     Nickname = colDef(
-      # Show pseudonymdisplayed under nickname
+      # Show Pseudonym_Displayed under nickname
       cell = JS('function(cellInfo) {
-        const pseudonymdisplayed = cellInfo.row["pseudonymdisplayed"] || "Unknown"
+        const Pseudonym_Displayed = cellInfo.row["Pseudonym_Displayed"] || "Unknown"
         return `
           <div>
             <div style="font-weight: 600">${cellInfo.value}</div>
-            <div style="font-size: 0.75rem">${pseudonymdisplayed}</div>
+            <div style="font-size: 0.75rem">${Pseudonym_Displayed}</div>
           </div>
         `
       }'),
       html = TRUE
     ),
-    pseudonymdisplayed = colDef(show = FALSE)
+    Pseudonym_Displayed = colDef(show = FALSE)
   ),
   # Vertically center cells
   defaultColDef = colDef(vAlign = "center"),
