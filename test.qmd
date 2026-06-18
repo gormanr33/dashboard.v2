@@ -86,7 +86,7 @@ reactable(
     MembershipType = colDef(name = "Membership Type"),
     Pseudonym_Displayed = colDef(name = "Pseudonym Displayed"),
 
-    Seeking_A = colDef(name = "Seeking A"),
+    Seeking_a = colDef(name = "Seeking A"),
     MaritalStatus = colDef(name = "Marital Status"),
     WantChildren = colDef(name = "Wants Children"),
     HaveChildren = colDef(name = "Has Children"),
@@ -108,9 +108,9 @@ reactable(
 
     EducationLevel = colDef(name = "Education Level"),
     TestedIQ = colDef(name = "I.Q. Score"),
-    MyersBriggs = colDef(name = "Myers-Briggs Type Indication"),
+    MyersBriggs = colDef(name = "Myers-Briggs Type"),
     LookingFor = colDef(name = "Looking For"),
-    PoliticalOrientation = colDef(name = "Political Orientation"),
+    PoliticalOrientaion = colDef(name = "Political Orientation"),
     HumanPhenotypes = colDef(name = "Human Phenotypes"),
     BodyType = colDef(name = "Body Type"),
     EyeColor = colDef(name = "Eye Color"),
