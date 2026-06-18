@@ -66,9 +66,54 @@ stupiddftable$Virginity[is.na(stupiddftable$Virginity)] <- "-"
 
 ```{r}
 #| echo: false
-datatable(stupiddftable, options = list(pageLength = 15))
-```
+reactable(
+  stupiddftable, 
+  resizable = TRUE, 
+  columns = list(
+    # Column 1: Activity with Tippy Tooltip
+    Activity = colDef(
+      cell = function(value) {
+        # Only attach a tooltip if there is actual text to display
+        if (is.na(value) || value == "") return("")
+        tippy(value, tooltip = value)
+      },
+      style = list(
+        whiteSpace = "nowrap", 
+        overflow = "hidden", 
+        textOverflow = "ellipsis"
+      )
+    ), 
+    
+    # Column 2: AboutMe with Tippy Tooltip
+    AboutMe = colDef(
+      cell = function(value) {
+        if (is.na(value) || value == "") return("")
+        tippy(value, tooltip = value)
+      },
+      style = list(
+        whiteSpace = "nowrap", 
+        overflow = "hidden", 
+        textOverflow = "ellipsis"
+      )
+    ),
+    Nickname = colDef(
+      # Show pseudonymdisplayed under nickname
+      cell = JS('function(cellInfo) {
+        const pseudonymdisplayed = cellInfo.row["pseudonymdisplayed"] || "Unknown"
+        return `
+          <div>
+            <div style="font-weight: 600">${cellInfo.value}</div>
+            <div style="font-size: 0.75rem">${pseudonymdisplayed}</div>
+          </div>
+        `
+      }'),
+      html = TRUE
+    ),
+    pseudonymdisplayed = colDef(show = FALSE)
+  ),
+  # Vertically center cells
+  defaultColDef = colDef(vAlign = "center"),
+  defaultPageSize = 6
+    )
 
-```{r}
-stupiddftable
 ```
