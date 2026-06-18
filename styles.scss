@@ -22,6 +22,14 @@
 .my-table {
   font-family: $font-family-base;
   border-radius: 12px;
+
+  /* FIX: allow horizontal scroll instead of squishing */
+  overflow-x: auto;
+}
+
+/* FIX: prevent aggressive column compression */
+.my-table .rt-table {
+  table-layout: auto !important;
 }
 
 /* Header styling */
@@ -29,6 +37,18 @@
   background-color: $primary;
   color: white;
   font-weight: 600;
+
+  /* FIX: give header breathing room */
+  min-height: 60px;
+}
+
+/* FIX: header text should wrap instead of squish */
+.my-table .rt-th {
+  white-space: normal !important;
+  overflow: visible;
+  text-overflow: unset;
+  line-height: 1.2;
+  padding: 10px;
 }
 
 /* Cell styling */
@@ -42,6 +62,7 @@
   transition: background 0.15s ease;
 }
 
+/* Keep your theme-based striping */
 .my-table .rt-tr-group:nth-child(odd) {
   background: rgba($primary, 0.08);
 }
