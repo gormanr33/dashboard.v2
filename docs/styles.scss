@@ -18,9 +18,53 @@
   border-left: 5px solid #8B5CF6;
 }
 
-/* Tables */
-.table-striped > tbody > tr:nth-of-type(odd) {
-  background: rgba(20, 184, 166, .05);
+/* Table container */
+.my-table {
+  font-family: $font-family-base;
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+/* TABLE BASE (critical) */
+.my-table .rt-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* HEADER ROW */
+.my-table .rt-thead {
+  background-color: $primary;
+  color: white;
+  font-weight: 600;
+}
+
+/* HEADER CELLS (THIS is what you were missing) */
+.my-table .rt-th {
+  white-space: normal !important;
+  padding: 10px;
+  line-height: 1.2;
+  color: white;
+}
+
+/* BODY ROWS */
+.my-table .rt-tbody .rt-tr-group {
+  transition: background 0.15s ease;
+}
+
+/* STRIPING (correct selector) */
+.my-table .rt-tbody .rt-tr-group:nth-child(odd) {
+  background: rgba($primary, 0.08);
+}
+
+/* HOVER */
+.my-table .rt-tbody .rt-tr-group:hover {
+  background: rgba($primary, 0.12);
+}
+
+/* CELLS */
+.my-table .rt-td {
+  padding: 10px;
+  border-color: rgba(0, 0, 0, 0.05);
 }
 
 /* Text selection */

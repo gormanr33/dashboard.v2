@@ -22,54 +22,49 @@
 .my-table {
   font-family: $font-family-base;
   border-radius: 12px;
-
-  /* FIX: allow horizontal scroll instead of squishing */
   overflow-x: auto;
 }
 
-/* FIX: prevent aggressive column compression */
+/* TABLE BASE (critical) */
 .my-table .rt-table {
-  table-layout: auto !important;
+  width: 100%;
+  border-collapse: collapse;
 }
 
-/* Header styling */
+/* HEADER ROW */
 .my-table .rt-thead {
   background-color: $primary;
   color: white;
   font-weight: 600;
-
-  /* FIX: give header breathing room */
-  min-height: 60px;
 }
 
-/* FIX: header text should wrap instead of squish */
+/* HEADER CELLS (THIS is what you were missing) */
 .my-table .rt-th {
   white-space: normal !important;
-  overflow: visible;
-  text-overflow: unset;
+  padding: 10px;
   line-height: 1.2;
-  padding: 10px;
+  color: white;
 }
 
-/* Cell styling */
-.my-table .rt-td {
-  padding: 10px;
-  border-color: rgba(0, 0, 0, 0.05);
-}
-
-/* Row striping */
-.my-table .rt-tr-group {
+/* BODY ROWS */
+.my-table .rt-tbody .rt-tr-group {
   transition: background 0.15s ease;
 }
 
-/* Keep your theme-based striping */
-.my-table .rt-tr-group:nth-child(odd) {
+/* STRIPING (correct selector) */
+.my-table .rt-tbody .rt-tr-group:nth-child(odd) {
   background: rgba($primary, 0.08);
 }
 
-/* Hover effect */
-.my-table .rt-tr-group:hover {
+/* HOVER */
+.my-table .rt-tbody .rt-tr-group:hover {
   background: rgba($primary, 0.12);
+}
+
+/* CELLS */
+.my-table .rt-td {
+  padding: 10px;
+  border-color: rgba(0, 0, 0, 0.05);
 }
 
 /* Text selection */
