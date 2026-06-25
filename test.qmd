@@ -14,7 +14,7 @@ source("setup.R")
 ```
 
 ::: {.callout-note title="Helpful Tips"}
-You can hover your mouse above "About Me" column entries to read the full text associated with the profile. The formatting of this table is a work in progress.
+yo can run this as a test. You can hover your mouse above "About Me" column entries to read the full text associated with the profile. The formatting of this table is a work in progress.
 :::
 
 ```{r, echo=FALSE}
