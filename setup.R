@@ -1,6 +1,8 @@
 # setup.R
 
 ## Load packages
+library(gitcreds)
+library(usethis)
 library(tidyverse)
 library(leaflet)
 library(scales)
